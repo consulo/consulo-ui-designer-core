@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2012 JetBrains s.r.o.
+ * Copyright 2000-2014 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,14 @@
  */
 package com.intellij.designer.actions;
 
+import java.awt.datatransfer.DataFlavor;
+import java.util.List;
+import java.util.Map;
+
+import org.jdom.Element;
+import org.jdom.output.XMLOutputter;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.designer.DesignerBundle;
 import com.intellij.designer.clipboard.SimpleTransferable;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
@@ -34,275 +42,321 @@ import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.ide.CopyPasteManager;
 import com.intellij.uiDesigner.SerializedComponentData;
 import com.intellij.util.ThrowableRunnable;
-import org.jdom.Element;
-import org.jdom.output.XMLOutputter;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Alexander Lobas
  */
-public class CommonEditActionsProvider implements DeleteProvider, CopyProvider, PasteProvider, CutProvider {
-  private static final DataFlavor DATA_FLAVOR = FileCopyPasteUtil.createJvmDataFlavor(SerializedComponentData.class);
+public class CommonEditActionsProvider implements DeleteProvider, CopyProvider, PasteProvider, CutProvider
+{
+	private static final DataFlavor DATA_FLAVOR = FileCopyPasteUtil.createJvmDataFlavor(SerializedComponentData.class);
 
-  private final DesignerEditorPanel myDesigner;
+	public static boolean isDeleting;
 
-  public CommonEditActionsProvider(DesignerEditorPanel designer) {
-    myDesigner = designer;
-  }
+	private final DesignerEditorPanel myDesigner;
 
-  protected EditableArea getArea(DataContext dataContext) {
-    EditableArea area = EditableArea.DATA_KEY.getData(dataContext);
-    return area == null ? myDesigner.getSurfaceArea() : area;
-  }
+	public CommonEditActionsProvider(DesignerEditorPanel designer)
+	{
+		myDesigner = designer;
+	}
 
-  //////////////////////////////////////////////////////////////////////////////////////////
-  //
-  // Delete
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////
+	protected EditableArea getArea(DataContext dataContext)
+	{
+		EditableArea area = EditableArea.DATA_KEY.getData(dataContext);
+		return area == null ? myDesigner.getSurfaceArea() : area;
+	}
 
-  @Override
-  public boolean canDeleteElement(@NotNull DataContext dataContext) {
-    if (myDesigner.getInplaceEditingLayer().isEditing()) {
-      return false;
-    }
-    List<RadComponent> selection = getArea(dataContext).getSelection();
-    if (selection.isEmpty()) {
-      return false;
-    }
-    for (RadComponent component : selection) {
-      if (!component.canDelete()) {
-        return false;
-      }
-    }
-    return true;
-  }
+	//////////////////////////////////////////////////////////////////////////////////////////
+	//
+	// Delete
+	//
+	//////////////////////////////////////////////////////////////////////////////////////////
 
-  @Override
-  public void deleteElement(final @NotNull DataContext dataContext) {
-    myDesigner.getToolProvider().execute(new ThrowableRunnable<Exception>() {
-      @Override
-      public void run() throws Exception {
-        EditableArea area = getArea(dataContext);
-        List<RadComponent> selection = area.getSelection();
+	@Override
+	public boolean canDeleteElement(@NotNull DataContext dataContext)
+	{
+		if(myDesigner.getInplaceEditingLayer().isEditing())
+		{
+			return false;
+		}
+		List<RadComponent> selection = getArea(dataContext).getSelection();
+		if(selection.isEmpty())
+		{
+			return false;
+		}
+		for(RadComponent component : selection)
+		{
+			if(!component.canDelete())
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 
-        if (selection.isEmpty()) {
-          return;
-        }
+	@Override
+	public void deleteElement(final @NotNull DataContext dataContext)
+	{
+		myDesigner.getToolProvider().execute(new ThrowableRunnable<Exception>()
+		{
+			@Override
+			public void run() throws Exception
+			{
+				EditableArea area = getArea(dataContext);
+				List<RadComponent> selection = area.getSelection();
 
-        myDesigner.getToolProvider().loadDefaultTool();
-        List<RadComponent> components = RadComponent.getPureSelection(selection);
-        updateSelectionBeforeDelete(area, components.get(0), selection);
-        handleDeletion(components);
-      }
-    }, DesignerBundle.message("command.delete.selection"), true);
-  }
+				if(selection.isEmpty())
+				{
+					return;
+				}
 
-  private static void handleDeletion(@NotNull List<RadComponent> components) throws Exception {
-    // Segment the deleted components into lists of siblings
-    Map<RadComponent, List<RadComponent>> siblingLists = RadComponent.groupSiblings(components);
+				myDesigner.getToolProvider().loadDefaultTool();
+				List<RadComponent> components = RadComponent.getPureSelection(selection);
+				updateSelectionBeforeDelete(area, components.get(0), selection);
+				handleDeletion(components);
+			}
+		}, DesignerBundle.message("command.delete.selection"), true);
+	}
 
-    // Notify parent components about children getting deleted
-    for (Map.Entry<RadComponent, List<RadComponent>> entry : siblingLists.entrySet()) {
-      RadComponent parent = entry.getKey();
-      List<RadComponent> children = entry.getValue();
-      boolean finished = false;
-      if (parent instanceof IComponentDeletionParticipant) {
-        IComponentDeletionParticipant handler = (IComponentDeletionParticipant)parent;
-        finished = handler.deleteChildren(parent, children);
-      }
-      else if (parent.getLayout() instanceof IComponentDeletionParticipant) {
-        IComponentDeletionParticipant handler = (IComponentDeletionParticipant)parent.getLayout();
-        finished = handler.deleteChildren(parent, children);
-      }
+	private static void handleDeletion(@NotNull List<RadComponent> components) throws Exception
+	{
+		// Segment the deleted components into lists of siblings
+		Map<RadComponent, List<RadComponent>> siblingLists = RadComponent.groupSiblings(components);
 
-      if (!finished) {
-        deleteComponents(children);
-      }
-    }
-  }
+		// Notify parent components about children getting deleted
+		for(Map.Entry<RadComponent, List<RadComponent>> entry : siblingLists.entrySet())
+		{
+			RadComponent parent = entry.getKey();
+			List<RadComponent> children = entry.getValue();
+			boolean finished = false;
+			if(parent instanceof IComponentDeletionParticipant)
+			{
+				IComponentDeletionParticipant handler = (IComponentDeletionParticipant) parent;
+				finished = handler.deleteChildren(parent, children);
+			}
+			else if(parent != null && /*check root*/
+					parent.getLayout() instanceof IComponentDeletionParticipant)
+			{
+				IComponentDeletionParticipant handler = (IComponentDeletionParticipant) parent.getLayout();
+				finished = handler.deleteChildren(parent, children);
+			}
 
-  private static void deleteComponents(List<RadComponent> components) throws Exception {
-    if (components.get(0) instanceof IGroupDeleteComponent) {
-      ((IGroupDeleteComponent)components.get(0)).delete(components);
-    }
-    else {
-      for (RadComponent component : components) {
-        component.delete();
-      }
-    }
-  }
+			if(!finished)
+			{
+				deleteComponents(children);
+			}
+		}
+	}
 
-  public static void updateSelectionBeforeDelete(EditableArea area, RadComponent component, List<RadComponent> excludes) {
-    RadComponent newSelection = getNewSelection(component, excludes);
-    if (newSelection == null) {
-      area.deselectAll();
-    }
-    else {
-      area.select(newSelection);
-    }
-  }
+	private static void deleteComponents(List<RadComponent> components) throws Exception
+	{
+		if(components.get(0) instanceof IGroupDeleteComponent)
+		{
+			((IGroupDeleteComponent) components.get(0)).delete(components);
+		}
+		else
+		{
+			for(RadComponent component : components)
+			{
+				component.delete();
+			}
+		}
+	}
 
-  @Nullable
-  private static RadComponent getNewSelection(RadComponent component, List<RadComponent> excludes) {
-    RadComponent parent = component.getParent();
-    if (parent == null) {
-      return null;
-    }
+	public static void updateSelectionBeforeDelete(EditableArea area, RadComponent component, List<RadComponent> excludes)
+	{
+		try
+		{
+			isDeleting = true;
 
-    List<RadComponent> children = parent.getChildren();
-    int size = children.size();
-    for (int i = children.indexOf(component) + 1; i < size; i++) {
-      RadComponent next = children.get(i);
-      if (!excludes.contains(next)) {
-        return next;
-      }
-    }
+			RadComponent newSelection = getNewSelection(component, excludes);
+			if(newSelection == null)
+			{
+				area.deselectAll();
+			}
+			else
+			{
+				area.select(newSelection);
+			}
+		}
+		finally
+		{
+			isDeleting = false;
+		}
+	}
 
-    return parent;
-  }
-  //////////////////////////////////////////////////////////////////////////////////////////
-  //
-  // Copy
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////
+	@Nullable
+	private static RadComponent getNewSelection(RadComponent component, List<RadComponent> excludes)
+	{
+		RadComponent parent = component.getParent();
+		if(parent == null)
+		{
+			return null;
+		}
 
-  @Override
-  public boolean isCopyVisible(@NotNull DataContext dataContext) {
-    return true;
-  }
+		List<RadComponent> children = parent.getChildren();
+		int size = children.size();
+		for(int i = children.indexOf(component) + 1; i < size; i++)
+		{
+			RadComponent next = children.get(i);
+			if(!excludes.contains(next))
+			{
+				return next;
+			}
+		}
 
-  @Override
-  public boolean isCopyEnabled(@NotNull DataContext dataContext) {
-    if (myDesigner.getInplaceEditingLayer().isEditing()) {
-      return false;
-    }
+		return parent;
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////
+	//
+	// Copy
+	//
+	//////////////////////////////////////////////////////////////////////////////////////////
 
-    List<RadComponent> selection = getArea(dataContext).getSelection();
-    if (selection.isEmpty()) {
-      return false;
-    }
+	@Override
+	public boolean isCopyVisible(@NotNull DataContext dataContext)
+	{
+		return true;
+	}
 
-    RadComponent rootComponent = myDesigner.getRootComponent();
-    if (rootComponent instanceof IComponentCopyProvider) {
-      IComponentCopyProvider copyProvider = (IComponentCopyProvider)rootComponent;
-      return copyProvider.isCopyEnabled(selection);
-    }
+	@Override
+	public boolean isCopyEnabled(@NotNull DataContext dataContext)
+	{
+		if(myDesigner.getInplaceEditingLayer().isEditing())
+		{
+			return false;
+		}
 
-    return true;
-  }
+		List<RadComponent> selection = getArea(dataContext).getSelection();
+		if(selection.isEmpty())
+		{
+			return false;
+		}
 
-  @Override
-  public void performCopy(@NotNull DataContext dataContext) {
-    doCopy(dataContext);
-  }
+		RadComponent rootComponent = myDesigner.getRootComponent();
+		if(rootComponent instanceof IComponentCopyProvider)
+		{
+			IComponentCopyProvider copyProvider = (IComponentCopyProvider) rootComponent;
+			return copyProvider.isCopyEnabled(selection);
+		}
 
-  private boolean doCopy(DataContext dataContext) {
-    try {
-      Element root = new Element("designer");
-      root.setAttribute("target", myDesigner.getPlatformTarget());
+		return true;
+	}
 
-      List<RadComponent> components = RadComponent.getPureSelection(getArea(dataContext).getSelection());
-      RadComponent rootComponent = myDesigner.getRootComponent();
+	@Override
+	public void performCopy(@NotNull DataContext dataContext)
+	{
+		doCopy(dataContext);
+	}
 
-      if (rootComponent instanceof IComponentCopyProvider) {
-        IComponentCopyProvider copyProvider = (IComponentCopyProvider)rootComponent;
-        copyProvider.copyTo(root, components);
-      }
-      else {
-        for (RadComponent component : components) {
-          component.copyTo(root);
-        }
-      }
+	private boolean doCopy(DataContext dataContext)
+	{
+		try
+		{
+			Element root = new Element("designer");
+			root.setAttribute("target", myDesigner.getPlatformTarget());
 
-      SerializedComponentData data = new SerializedComponentData(new XMLOutputter().outputString(root));
-      CopyPasteManager.getInstance().setContents(new SimpleTransferable(data, DATA_FLAVOR));
+			List<RadComponent> components = RadComponent.getPureSelection(getArea(dataContext).getSelection());
+			RadComponent rootComponent = myDesigner.getRootComponent();
 
-      return true;
-    }
-    catch (Throwable e) {
-      myDesigner.showError("Copy error", e);
-      return false;
-    }
-  }
-  //////////////////////////////////////////////////////////////////////////////////////////
-  //
-  // Paste
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////
+			if(rootComponent instanceof IComponentCopyProvider)
+			{
+				IComponentCopyProvider copyProvider = (IComponentCopyProvider) rootComponent;
+				copyProvider.copyTo(root, components);
+			}
+			else
+			{
+				for(RadComponent component : components)
+				{
+					component.copyTo(root);
+				}
+			}
 
-  @Override
-  public boolean isPastePossible(@NotNull DataContext dataContext) {
-    return isPasteEnabled(dataContext);
-  }
+			SerializedComponentData data = new SerializedComponentData(new XMLOutputter().outputString(root));
+			CopyPasteManager.getInstance().setContents(new SimpleTransferable(data, DATA_FLAVOR));
 
-  @Override
-  public boolean isPasteEnabled(@NotNull DataContext dataContext) {
-    return !myDesigner.getInplaceEditingLayer().isEditing() && getSerializedComponentData() != null;
-  }
+			return true;
+		}
+		catch(Throwable e)
+		{
+			myDesigner.showError("Copy error", e);
+			return false;
+		}
+	}
+	//////////////////////////////////////////////////////////////////////////////////////////
+	//
+	// Paste
+	//
+	//////////////////////////////////////////////////////////////////////////////////////////
 
-  @Nullable
-  private String getSerializedComponentData() {
-    try {
-      CopyPasteManager copyPasteManager = CopyPasteManager.getInstance();
-      if (!copyPasteManager.isDataFlavorAvailable(DATA_FLAVOR)) {
-        return null;
-      }
+	@Override
+	public boolean isPastePossible(@NotNull DataContext dataContext)
+	{
+		return isPasteEnabled(dataContext);
+	}
 
-      Transferable content = copyPasteManager.getContents();
-      if (content == null) {
-        return null;
-      }
+	@Override
+	public boolean isPasteEnabled(@NotNull DataContext dataContext)
+	{
+		return !myDesigner.getInplaceEditingLayer().isEditing() && getSerializedComponentData() != null;
+	}
 
-      Object transferData = content.getTransferData(DATA_FLAVOR);
-      if (transferData instanceof SerializedComponentData) {
-        SerializedComponentData data = (SerializedComponentData)transferData;
-        String xmlComponents = data.getSerializedComponents();
-        if (xmlComponents.startsWith("<designer target=\"" + myDesigner.getPlatformTarget() + "\">")) {
-          return xmlComponents;
-        }
-      }
-    }
-    catch (Throwable e) {
-    }
+	@Nullable
+	private String getSerializedComponentData()
+	{
+		try
+		{
+			Object transferData = CopyPasteManager.getInstance().getContents(DATA_FLAVOR);
+			if(transferData instanceof SerializedComponentData)
+			{
+				SerializedComponentData data = (SerializedComponentData) transferData;
+				String xmlComponents = data.getSerializedComponents();
+				if(xmlComponents.startsWith("<designer target=\"" + myDesigner.getPlatformTarget() + "\">"))
+				{
+					return xmlComponents;
+				}
+			}
+		}
+		catch(Throwable ignored)
+		{
+		}
 
-    return null;
-  }
+		return null;
+	}
 
-  @Override
-  public void performPaste(@NotNull DataContext dataContext) {
-    ComponentPasteFactory factory = myDesigner.createPasteFactory(getSerializedComponentData());
-    if (factory != null) {
-      myDesigner.getToolProvider().setActiveTool(new PasteTool(true, factory));
-    }
-  }
+	@Override
+	public void performPaste(@NotNull DataContext dataContext)
+	{
+		ComponentPasteFactory factory = myDesigner.createPasteFactory(getSerializedComponentData());
+		if(factory != null)
+		{
+			myDesigner.getToolProvider().setActiveTool(new PasteTool(true, factory));
+		}
+	}
 
-  //////////////////////////////////////////////////////////////////////////////////////////
-  //
-  // Cut
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////
+	//
+	// Cut
+	//
+	//////////////////////////////////////////////////////////////////////////////////////////
 
-  @Override
-  public boolean isCutVisible(@NotNull DataContext dataContext) {
-    return true;
-  }
+	@Override
+	public boolean isCutVisible(@NotNull DataContext dataContext)
+	{
+		return true;
+	}
 
-  @Override
-  public boolean isCutEnabled(@NotNull DataContext dataContext) {
-    return isCopyEnabled(dataContext) && canDeleteElement(dataContext);
-  }
+	@Override
+	public boolean isCutEnabled(@NotNull DataContext dataContext)
+	{
+		return isCopyEnabled(dataContext) && canDeleteElement(dataContext);
+	}
 
-  @Override
-  public void performCut(@NotNull DataContext dataContext) {
-    if (doCopy(dataContext)) {
-      deleteElement(dataContext);
-    }
-  }
+	@Override
+	public void performCut(@NotNull DataContext dataContext)
+	{
+		if(doCopy(dataContext))
+		{
+			deleteElement(dataContext);
+		}
+	}
 }
