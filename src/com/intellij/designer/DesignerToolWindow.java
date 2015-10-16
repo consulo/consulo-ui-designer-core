@@ -15,6 +15,16 @@
  */
 package com.intellij.designer;
 
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
+import javax.swing.JComponent;
+import javax.swing.JScrollPane;
+
+import org.jetbrains.annotations.NotNull;
+import org.mustbe.consulo.RequiredDispatchThread;
 import com.intellij.designer.componentTree.ComponentTree;
 import com.intellij.designer.componentTree.ComponentTreeBuilder;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
@@ -31,136 +41,196 @@ import com.intellij.ui.ScrollPaneFactory;
 import com.intellij.ui.SideBorder;
 import com.intellij.util.ui.tree.TreeUtil;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-
 /**
  * @author Alexander Lobas
  */
-public final class DesignerToolWindow implements LightToolWindowContent {
-  private final Splitter myToolWindowPanel;
-  private ComponentTree myComponentTree;
-  private ComponentTreeBuilder myTreeBuilder;
-  private PropertyTablePanel myPropertyTablePanel;
+public final class DesignerToolWindow implements DesignerToolWindowContent
+{
+	private final Splitter myToolWindowPanel;
+	private ComponentTree myComponentTree;
+	private ComponentTreeBuilder myTreeBuilder;
+	private PropertyTablePanel myPropertyTablePanel;
 
-  public DesignerToolWindow(Project project, boolean updateOrientation) {
-    myComponentTree = new ComponentTree();
-    JScrollPane treeScrollPane = ScrollPaneFactory.createScrollPane(myComponentTree);
-    treeScrollPane.setBorder(IdeBorderFactory.createBorder(SideBorder.BOTTOM));
-    treeScrollPane.setPreferredSize(new Dimension(250, -1));
-    myComponentTree.initQuickFixManager(treeScrollPane.getViewport());
+	public DesignerToolWindow(Project project, boolean updateOrientation)
+	{
+		myComponentTree = new ComponentTree();
+		JScrollPane treeScrollPane = ScrollPaneFactory.createScrollPane(myComponentTree);
+		treeScrollPane.setBorder(IdeBorderFactory.createBorder(SideBorder.BOTTOM));
+		treeScrollPane.setPreferredSize(new Dimension(250, -1));
+		myComponentTree.initQuickFixManager(treeScrollPane.getViewport());
 
-    myPropertyTablePanel = new PropertyTablePanel(project);
+		myPropertyTablePanel = new PropertyTablePanel(project);
 
-    myToolWindowPanel = new Splitter(true, 0.42f);
-    myToolWindowPanel.setDividerWidth(3);
-    myToolWindowPanel.setShowDividerControls(false);
-    myToolWindowPanel.setShowDividerIcon(false);
-    myToolWindowPanel.setFirstComponent(treeScrollPane);
-    myToolWindowPanel.setSecondComponent(myPropertyTablePanel);
+		myToolWindowPanel = new Splitter(true, 0.42f)
+		{
+			@Override
+			public void doLayout()
+			{
+				super.doLayout();
 
-    if (updateOrientation) {
-      myToolWindowPanel.addComponentListener(new ComponentAdapter() {
-        @Override
-        public void componentResized(ComponentEvent e) {
-          Dimension size = myToolWindowPanel.getSize();
-          boolean newVertical = size.width < size.height;
-          if (myToolWindowPanel.getOrientation() != newVertical) {
-            myToolWindowPanel.setOrientation(newVertical);
-          }
-        }
-      });
-    }
-  }
+				JComponent firstComponent = getFirstComponent();
+				JComponent secondComponent = getSecondComponent();
+				if(firstComponent == null || secondComponent == null)
+				{
+					return;
+				}
 
-  void update(DesignerEditorPanel designer) {
-    clearTreeBuilder();
-    myComponentTree.newModel();
-    if (designer == null) {
-      myComponentTree.setDesignerPanel(null);
-      myPropertyTablePanel.setArea(null, null);
-    }
-    else {
-      myComponentTree.setDesignerPanel(designer);
-      myTreeBuilder = new ComponentTreeBuilder(myComponentTree, designer);
-      myPropertyTablePanel.setArea(designer, myTreeBuilder.getTreeArea());
-    }
-  }
+				int firstHeight = firstComponent.getHeight();
+				int dividerHeight = getDivider().getHeight();
+				int height = getSize().height;
 
-  @Override
-  public void dispose() {
-    clearTreeBuilder();
-    myToolWindowPanel.dispose();
-    myComponentTree = null;
-    myPropertyTablePanel = null;
-  }
+				if(firstHeight + dividerHeight + secondComponent.getHeight() != height)
+				{
+					Rectangle bounds = secondComponent.getBounds();
+					bounds.height = height - firstHeight - dividerHeight;
+					secondComponent.setBounds(bounds);
+				}
+			}
+		};
 
-  private void clearTreeBuilder() {
-    if (myTreeBuilder != null) {
-      Disposer.dispose(myTreeBuilder);
-      myTreeBuilder = null;
-    }
-  }
+		myToolWindowPanel.setDividerWidth(3);
+		myToolWindowPanel.setShowDividerControls(false);
+		myToolWindowPanel.setShowDividerIcon(false);
+		myToolWindowPanel.setFirstComponent(treeScrollPane);
+		myToolWindowPanel.setSecondComponent(myPropertyTablePanel);
 
-  Splitter getToolWindowPanel() {
-    return myToolWindowPanel;
-  }
+		if(updateOrientation)
+		{
+			myToolWindowPanel.addComponentListener(new ComponentAdapter()
+			{
+				@Override
+				public void componentResized(ComponentEvent e)
+				{
+					Dimension size = myToolWindowPanel.getSize();
+					boolean newVertical = size.width < size.height;
+					if(myToolWindowPanel.getOrientation() != newVertical)
+					{
+						myToolWindowPanel.setOrientation(newVertical);
+					}
+				}
+			});
+		}
+	}
 
-  AnAction[] createActions() {
-    AnAction expandAll = new AnAction("Expand All", null, AllIcons.Actions.Expandall) {
-      @Override
-      public void actionPerformed(AnActionEvent e) {
-        if (myTreeBuilder != null) {
-          myTreeBuilder.expandAll(null);
-        }
-      }
-    };
+	void update(DesignerEditorPanel designer)
+	{
+		clearTreeBuilder();
+		myComponentTree.newModel();
+		if(designer == null)
+		{
+			myComponentTree.setDesignerPanel(null);
+			myPropertyTablePanel.setArea(null, null);
+		}
+		else
+		{
+			myComponentTree.setDesignerPanel(designer);
+			myTreeBuilder = new ComponentTreeBuilder(myComponentTree, designer);
+			myPropertyTablePanel.setArea(designer, myTreeBuilder.getTreeArea());
+		}
+	}
 
-    AnAction collapseAll = new AnAction("Collapse All", null, AllIcons.Actions.Collapseall) {
-      @Override
-      public void actionPerformed(AnActionEvent e) {
-        if (myTreeBuilder != null) {
-          TreeUtil.collapseAll(myComponentTree, 1);
-        }
-      }
-    };
+	@Override
+	public void dispose()
+	{
+		clearTreeBuilder();
+		myToolWindowPanel.dispose();
+		myComponentTree = null;
+		myPropertyTablePanel = null;
+	}
 
-    return new AnAction[]{expandAll, collapseAll};
-  }
+	private void clearTreeBuilder()
+	{
+		if(myTreeBuilder != null)
+		{
+			Disposer.dispose(myTreeBuilder);
+			myTreeBuilder = null;
+		}
+	}
 
-  public ComponentTree getComponentTree() {
-    return myComponentTree;
-  }
+	Splitter getToolWindowPanel()
+	{
+		return myToolWindowPanel;
+	}
 
-  public RadPropertyTable getPropertyTable() {
-    return myPropertyTablePanel.getPropertyTable();
-  }
+	AnAction[] createActions()
+	{
+		AnAction expandAll = new AnAction("Expand All", null, AllIcons.Actions.Expandall)
+		{
+			@RequiredDispatchThread
+			@Override
+			public void actionPerformed(@NotNull AnActionEvent e)
+			{
+				if(myTreeBuilder != null)
+				{
+					TreeUtil.expandAll(myComponentTree);
+				}
+			}
+		};
 
-  public void expandFromState() {
-    if (myTreeBuilder != null) {
-      myTreeBuilder.expandFromState();
-    }
-  }
+		AnAction collapseAll = new AnAction("Collapse All", null, AllIcons.Actions.Collapseall)
+		{
+			@RequiredDispatchThread
+			@Override
+			public void actionPerformed(@NotNull AnActionEvent e)
+			{
+				if(myTreeBuilder != null)
+				{
+					TreeUtil.collapseAll(myComponentTree, 1);
+				}
+			}
+		};
 
-  public void refresh(boolean updateProperties) {
-    if (myTreeBuilder != null) {
-      if (updateProperties) {
-        myTreeBuilder.selectFromSurface();
-      }
-      else {
-        myTreeBuilder.queueUpdate();
-      }
-    }
-  }
+		return new AnAction[]{
+				expandAll,
+				collapseAll
+		};
+	}
 
-  public void updateInspections() {
-    if (myComponentTree != null) {
-      myComponentTree.updateInspections();
-    }
-    if (myPropertyTablePanel != null) {
-      myPropertyTablePanel.getPropertyTable().updateInspections();
-    }
-  }
+	public ComponentTree getComponentTree()
+	{
+		return myComponentTree;
+	}
+
+	public RadPropertyTable getPropertyTable()
+	{
+		return myPropertyTablePanel.getPropertyTable();
+	}
+
+	@Override
+	public void expandFromState()
+	{
+		if(myTreeBuilder != null)
+		{
+			myTreeBuilder.expandFromState();
+		}
+	}
+
+	@Override
+	public void refresh(boolean updateProperties)
+	{
+		if(myTreeBuilder != null)
+		{
+			if(updateProperties)
+			{
+				myTreeBuilder.selectFromSurface();
+			}
+			else
+			{
+				myTreeBuilder.queueUpdate();
+			}
+		}
+	}
+
+	@Override
+	public void updateInspections()
+	{
+		if(myComponentTree != null)
+		{
+			myComponentTree.updateInspections();
+		}
+		if(myPropertyTablePanel != null)
+		{
+			myPropertyTablePanel.getPropertyTable().updateInspections();
+		}
+	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2012 JetBrains s.r.o.
+ * Copyright 2000-2013 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.intellij.designer.designSurface;
+package com.intellij.designer;
 
-import javax.swing.JComponent;
-
-/**
- * @author Alexander Lobas
- */
-public class FeedbackLayer extends JComponent
+public interface PaletteToolWindowContent extends LightToolWindowContent
 {
-	private final DesignerEditorPanel myDesigner;
+	void clearActiveItem();
 
-	public FeedbackLayer(DesignerEditorPanel designer)
-	{
-		myDesigner = designer;
-	}
-
-	public double getZoom()
-	{
-		return myDesigner.getZoom();
-	}
+	void refresh();
 }
