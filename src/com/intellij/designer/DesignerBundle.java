@@ -15,7 +15,7 @@
  */
 package com.intellij.designer;
 
-import org.consulo.lombok.annotations.Bundle;
+import consulo.lombok.annotations.Bundle;
 
 /**
  * @author yole
