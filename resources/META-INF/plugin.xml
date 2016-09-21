@@ -1,4 +1,4 @@
-<idea-plugin version="2">
+<idea-plugin>
 	<name>UI Designer (Core)</name>
 	<id>com.intellij.ui-designer-new</id>
 	<description>Provides shared functionality for visual editing plugins.</description>
@@ -15,11 +15,7 @@
 		</component>
 	</project-components>
 
-	<extensions defaultExtensionNs="com.intellij">
-		<errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
-	</extensions>
-
 	<extensionPoints>
-		<extensionPoint qualifiedName="Designer.customizations" interface="com.intellij.designer.DesignerCustomizations"/>
+		<extensionPoint name="customizations" interface="com.intellij.designer.DesignerCustomizations"/>
 	</extensionPoints>
 </idea-plugin>

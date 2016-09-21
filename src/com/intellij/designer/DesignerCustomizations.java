@@ -15,12 +15,12 @@
  */
 package com.intellij.designer;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.extensions.ExtensionPointName;
 import com.intellij.openapi.wm.ToolWindowAnchor;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class DesignerCustomizations {
-  public static final ExtensionPointName<DesignerCustomizations> EP_NAME = ExtensionPointName.create("Designer.customizations");
+  public static final ExtensionPointName<DesignerCustomizations> EP_NAME = ExtensionPointName.create("com.intellij.ui-designer-new.customizations");
 
   /**
    * Default location of the palette

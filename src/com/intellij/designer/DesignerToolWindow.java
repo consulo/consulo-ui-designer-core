@@ -24,7 +24,6 @@ import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.RequiredDispatchThread;
 import com.intellij.designer.componentTree.ComponentTree;
 import com.intellij.designer.componentTree.ComponentTreeBuilder;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
@@ -40,6 +39,7 @@ import com.intellij.ui.IdeBorderFactory;
 import com.intellij.ui.ScrollPaneFactory;
 import com.intellij.ui.SideBorder;
 import com.intellij.util.ui.tree.TreeUtil;
+import consulo.annotations.RequiredDispatchThread;
 
 /**
  * @author Alexander Lobas
