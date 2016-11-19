@@ -20,6 +20,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.actionSystem.ex.ComboBoxAction;
+import com.intellij.openapi.actionSystem.ex.ComboBoxButton;
 import com.intellij.openapi.ui.popup.JBPopup;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.ListPopup;
@@ -84,7 +85,7 @@ public abstract class AbstractComboBoxAction<T> extends ComboBoxAction {
   @Override
   protected ComboBoxButton createComboBoxButton(Presentation presentation) {
     if (myShowDisabledActions) {
-      return new ComboBoxButton(presentation) {
+      return new ComboBoxButton(this, presentation) {
         @Override
         protected JBPopup createPopup(Runnable onDispose) {
           ListPopup popup = JBPopupFactory.getInstance().createActionGroupPopup(
