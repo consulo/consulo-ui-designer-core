@@ -15,11 +15,28 @@
  */
 package com.intellij.designer;
 
-import consulo.lombok.annotations.Bundle;
+import org.jetbrains.annotations.PropertyKey;
+import com.intellij.AbstractBundle;
 
 /**
  * @author yole
  */
-@Bundle("messages.DesignerBundle")
-public class DesignerBundle {
+public class DesignerBundle extends AbstractBundle
+{
+	private static final DesignerBundle ourInstance = new DesignerBundle();
+
+	private DesignerBundle()
+	{
+		super("messages.DesignerBundle");
+	}
+
+	public static String message(@PropertyKey(resourceBundle = "messages.DesignerBundle") String key)
+	{
+		return ourInstance.getMessage(key);
+	}
+
+	public static String message(@PropertyKey(resourceBundle = "messages.DesignerBundle") String key, Object... params)
+	{
+		return ourInstance.getMessage(key, params);
+	}
 }
