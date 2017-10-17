@@ -24,9 +24,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.openapi.wm.ex.ToolWindowEx;
-import com.intellij.openapi.wm.impl.content.ToolWindowContentUi;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentManager;
+import consulo.wm.impl.ToolWindowContentUI;
 import icons.UIDesignerNewIcons;
 
 /**
@@ -78,7 +78,7 @@ public final class DesignerToolWindowManager extends AbstractToolWindowManager
 
 		if(!ApplicationManager.getApplication().isHeadlessEnvironment())
 		{
-			myToolWindow.getComponent().putClientProperty(ToolWindowContentUi.HIDE_ID_LABEL, "true");
+			myToolWindow.getComponent().putClientProperty(ToolWindowContentUI.HIDE_ID_LABEL, "true");
 		}
 
 		((ToolWindowEx) myToolWindow).setTitleActions(myToolWindowContent.createActions());
