@@ -15,19 +15,22 @@
  */
 package com.intellij.designer.actions;
 
+import java.awt.event.KeyEvent;
+import java.util.List;
+
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.designer.designSurface.ComponentSelectionListener;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
 import com.intellij.designer.designSurface.EditableArea;
 import com.intellij.designer.model.RadComponent;
 import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.util.Key;
 import com.intellij.ui.IdeBorderFactory;
 import com.intellij.ui.SideBorder;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
-import java.awt.event.KeyEvent;
-import java.util.List;
 
 /**
  * @author Alexander Lobas
@@ -227,11 +230,11 @@ public class DesignerActionPanel implements DataProvider {
   }
 
   @Override
-  public Object getData(@NonNls String dataId) {
-    if (PlatformDataKeys.DELETE_ELEMENT_PROVIDER.is(dataId) ||
-        PlatformDataKeys.CUT_PROVIDER.is(dataId) ||
-        PlatformDataKeys.COPY_PROVIDER.is(dataId) ||
-        PlatformDataKeys.PASTE_PROVIDER.is(dataId)) {
+  public Object getData(@NotNull Key<?> dataId) {
+    if (PlatformDataKeys.DELETE_ELEMENT_PROVIDER == dataId ||
+        PlatformDataKeys.CUT_PROVIDER == dataId ||
+        PlatformDataKeys.COPY_PROVIDER == dataId ||
+        PlatformDataKeys.PASTE_PROVIDER == dataId) {
       return myCommonEditActionsProvider;
     }
     return null;

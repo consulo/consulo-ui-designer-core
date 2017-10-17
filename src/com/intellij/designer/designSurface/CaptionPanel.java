@@ -25,7 +25,6 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.designer.actions.CommonEditActionsProvider;
@@ -41,6 +40,7 @@ import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.util.Key;
 import com.intellij.ui.IdeBorderFactory;
 import com.intellij.ui.SideBorder;
 import com.intellij.ui.components.JBLayeredPane;
@@ -232,9 +232,9 @@ public class CaptionPanel extends JBLayeredPane implements DataProvider, DeleteP
 	}
 
 	@Override
-	public Object getData(@NonNls String dataId)
+	public Object getData(@NotNull Key<?> dataId)
 	{
-		if(PlatformDataKeys.DELETE_ELEMENT_PROVIDER.is(dataId))
+		if(PlatformDataKeys.DELETE_ELEMENT_PROVIDER == dataId)
 		{
 			return this;
 		}

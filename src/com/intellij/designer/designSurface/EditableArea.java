@@ -15,23 +15,24 @@
  */
 package com.intellij.designer.designSurface;
 
+import java.awt.Cursor;
+import java.util.Collection;
+import java.util.List;
+
+import javax.swing.JComponent;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.designer.designSurface.tools.InputTool;
 import com.intellij.designer.model.RadComponent;
 import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.DataKey;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.Collection;
-import java.util.List;
+import com.intellij.openapi.util.Key;
 
 /**
  * @author Alexander Lobas
  */
 public interface EditableArea {
-  DataKey<EditableArea> DATA_KEY = DataKey.create("EditableArea");
+  Key<EditableArea> DATA_KEY = Key.create("EditableArea");
 
   //////////////////////////////////////////////////////////////////////////////////////////
   //

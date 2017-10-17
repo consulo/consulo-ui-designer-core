@@ -60,9 +60,7 @@ import com.intellij.openapi.wm.ToolWindowType;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.openapi.wm.ex.ToolWindowEx;
 import com.intellij.openapi.wm.impl.AnchoredButton;
-import com.intellij.openapi.wm.impl.InternalDecorator;
-import com.intellij.openapi.wm.impl.StripeButtonUI;
-import com.intellij.openapi.wm.impl.content.ToolWindowContentUi;
+import com.intellij.openapi.wm.impl.DesktopStripeButtonUI;
 import com.intellij.ui.IdeBorderFactory;
 import com.intellij.ui.InplaceButton;
 import com.intellij.ui.PopupHandler;
@@ -72,6 +70,8 @@ import com.intellij.ui.components.panels.Wrapper;
 import com.intellij.ui.tabs.TabsUtil;
 import com.intellij.util.ui.EmptyIcon;
 import com.intellij.util.ui.UIUtil;
+import consulo.ui.ex.ToolWindowInternalDecorator;
+import consulo.wm.impl.ToolWindowContentUI;
 
 /**
  * @author Alexander Lobas
@@ -199,7 +199,7 @@ public class LightToolWindow extends JPanel
 			@Override
 			public void updateUI()
 			{
-				setUI(StripeButtonUI.createUI(this));
+				setUI(DesktopStripeButtonUI.createUI(this));
 				setFont(UIUtil.getLabelFont(UIUtil.FontSize.SMALL));
 			}
 
@@ -456,7 +456,7 @@ public class LightToolWindow extends JPanel
 
 	private void showGearPopup(Component component, int x, int y)
 	{
-		ActionPopupMenu popupMenu = ((ActionManagerImpl) ActionManager.getInstance()).createActionPopupMenu(ToolWindowContentUi.POPUP_PLACE, createGearPopupGroup(),
+		ActionPopupMenu popupMenu = ((ActionManagerImpl) ActionManager.getInstance()).createActionPopupMenu(ToolWindowContentUI.POPUP_PLACE, createGearPopupGroup(),
 				new MenuItemPresentationFactory(true));
 		popupMenu.getComponent().show(component, x, y);
 	}
@@ -520,7 +520,7 @@ public class LightToolWindow extends JPanel
 	{
 		public TogglePinnedModeAction()
 		{
-			copyFrom(ActionManager.getInstance().getAction(InternalDecorator.TOGGLE_PINNED_MODE_ACTION_ID));
+			copyFrom(ActionManager.getInstance().getAction(ToolWindowInternalDecorator.TOGGLE_PINNED_MODE_ACTION_ID));
 		}
 
 		@Override
@@ -542,7 +542,7 @@ public class LightToolWindow extends JPanel
 	{
 		public ToggleDockModeAction()
 		{
-			super(ToolWindowType.DOCKED, InternalDecorator.TOGGLE_DOCK_MODE_ACTION_ID);
+			super(ToolWindowType.DOCKED, ToolWindowInternalDecorator.TOGGLE_DOCK_MODE_ACTION_ID);
 		}
 
 		@Override
@@ -566,7 +566,7 @@ public class LightToolWindow extends JPanel
 	{
 		public ToggleFloatingModeAction()
 		{
-			super(ToolWindowType.FLOATING, InternalDecorator.TOGGLE_FLOATING_MODE_ACTION_ID);
+			super(ToolWindowType.FLOATING, ToolWindowInternalDecorator.TOGGLE_FLOATING_MODE_ACTION_ID);
 		}
 	}
 
@@ -574,7 +574,7 @@ public class LightToolWindow extends JPanel
 	{
 		public ToggleWindowedModeAction()
 		{
-			super(ToolWindowType.WINDOWED, InternalDecorator.TOGGLE_WINDOWED_MODE_ACTION_ID);
+			super(ToolWindowType.WINDOWED, ToolWindowInternalDecorator.TOGGLE_WINDOWED_MODE_ACTION_ID);
 		}
 
 		@Override
@@ -621,7 +621,7 @@ public class LightToolWindow extends JPanel
 	{
 		public ToggleSideModeAction()
 		{
-			copyFrom(ActionManager.getInstance().getAction(InternalDecorator.TOGGLE_SIDE_MODE_ACTION_ID));
+			copyFrom(ActionManager.getInstance().getAction(ToolWindowInternalDecorator.TOGGLE_SIDE_MODE_ACTION_ID));
 		}
 
 		@Override

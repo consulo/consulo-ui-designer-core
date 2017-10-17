@@ -61,7 +61,7 @@ public class CommonEditActionsProvider implements DeleteProvider, CopyProvider, 
 
 	protected EditableArea getArea(DataContext dataContext)
 	{
-		EditableArea area = EditableArea.DATA_KEY.getData(dataContext);
+		EditableArea area = dataContext.getData(EditableArea.DATA_KEY);
 		return area == null ? myDesigner.getSurfaceArea() : area;
 	}
 

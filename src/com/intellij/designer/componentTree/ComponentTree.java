@@ -15,6 +15,25 @@
  */
 package com.intellij.designer.componentTree;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.event.MouseEvent;
+import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JTree;
+import javax.swing.JViewport;
+import javax.swing.ToolTipManager;
+import javax.swing.border.LineBorder;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.codeHighlighting.HighlightDisplayLevel;
 import com.intellij.codeInsight.daemon.impl.SeverityRegistrar;
 import com.intellij.designer.actions.DesignerActionPanel;
@@ -30,21 +49,11 @@ import com.intellij.openapi.editor.colors.EditorColorsManager;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Key;
 import com.intellij.ui.ColoredTreeCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.tree.TreeUtil;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import javax.swing.border.LineBorder;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.util.List;
 
 /**
  * @author Alexander Lobas
@@ -107,12 +116,12 @@ public final class ComponentTree extends Tree implements DataProvider {
   }
 
   @Override
-  public Object getData(@NonNls String dataId) {
-    if (EditableArea.DATA_KEY.is(dataId)) {
+  public Object getData(@NotNull Key<?> dataId) {
+    if (EditableArea.DATA_KEY == dataId) {
       return myArea;
     }
     if (myDesigner != null) {
-      if (PlatformDataKeys.FILE_EDITOR.is(dataId)) {
+      if (PlatformDataKeys.FILE_EDITOR == dataId) {
         return myDesigner.getEditor();
       }
       return myDesigner.getActionPanel().getData(dataId);

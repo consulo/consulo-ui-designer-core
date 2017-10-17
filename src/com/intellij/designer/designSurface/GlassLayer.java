@@ -15,16 +15,18 @@
  */
 package com.intellij.designer.designSurface;
 
+import java.awt.AWTEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JComponent;
+
+import org.jetbrains.annotations.NonNls;
 import com.intellij.designer.componentTree.TreeDropListener;
 import com.intellij.designer.designSurface.tools.ToolProvider;
 import com.intellij.designer.palette.PaletteItem;
 import com.intellij.openapi.actionSystem.DataProvider;
-import org.jetbrains.annotations.NonNls;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
+import com.intellij.openapi.util.Key;
 
 /**
  * @author Alexander Lobas
@@ -77,7 +79,7 @@ public final class GlassLayer extends JComponent implements DataProvider {
   }
 
   @Override
-  public Object getData(@NonNls String dataId) {
-    return EditableArea.DATA_KEY.is(dataId) ? myArea : null;
+  public Object getData(@NonNls Key<?> dataId) {
+    return EditableArea.DATA_KEY == dataId ? myArea : null;
   }
 }

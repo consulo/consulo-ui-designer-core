@@ -34,7 +34,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.designer.PaletteToolWindowContent;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
@@ -44,6 +44,7 @@ import com.intellij.openapi.actionSystem.CommonShortcuts;
 import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.util.Key;
 import com.intellij.ui.ScrollPaneFactory;
 
 /**
@@ -260,9 +261,9 @@ public class PalettePanel extends JPanel implements DataProvider, PaletteToolWin
 	}
 
 	@Override
-	public Object getData(@NonNls String dataId)
+	public Object getData(@NotNull Key<?> dataId)
 	{
-		if(PlatformDataKeys.FILE_EDITOR.is(dataId) && myDesigner != null)
+		if(PlatformDataKeys.FILE_EDITOR == dataId && myDesigner != null)
 		{
 			return myDesigner.getEditor();
 		}
