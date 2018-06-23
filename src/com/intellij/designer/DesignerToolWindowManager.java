@@ -26,6 +26,7 @@ import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.openapi.wm.ex.ToolWindowEx;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentManager;
+import consulo.awt.TargetAWT;
 import consulo.wm.impl.ToolWindowContentUI;
 import icons.UIDesignerNewIcons;
 
@@ -141,7 +142,7 @@ public final class DesignerToolWindowManager extends AbstractToolWindowManager
 		DesignerToolWindow toolWindowContent = new DesignerToolWindow(myProject, false);
 		toolWindowContent.update((DesignerEditorPanel) designer);
 
-		return createContent(designer, toolWindowContent, DesignerBundle.message("designer.toolwindow.title"), UIDesignerNewIcons.ToolWindow, toolWindowContent.getToolWindowPanel(),
+		return createContent(designer, toolWindowContent, DesignerBundle.message("designer.toolwindow.title"), TargetAWT.to(UIDesignerNewIcons.ToolWindow), toolWindowContent.getToolWindowPanel(),
 				toolWindowContent.getComponentTree(), 320, toolWindowContent.createActions());
 	}
 }

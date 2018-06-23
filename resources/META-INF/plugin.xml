@@ -3,7 +3,6 @@
 	<id>com.intellij.ui-designer-new</id>
 	<description>Provides shared functionality for visual editing plugins.</description>
 	<vendor>JetBrains</vendor>
-	<depends>com.intellij.xml</depends>
 	<version>SNAPSHOT</version>
 	<resource-bundle>messages.DesignerBundle</resource-bundle>
 	<project-components>
