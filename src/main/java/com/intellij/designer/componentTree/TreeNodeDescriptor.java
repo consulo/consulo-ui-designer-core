@@ -16,7 +16,7 @@
 package com.intellij.designer.componentTree;
 
 import com.intellij.ide.util.treeView.NodeDescriptor;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 /**
  * @author Alexander Lobas

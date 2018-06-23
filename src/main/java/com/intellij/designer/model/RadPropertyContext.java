@@ -15,7 +15,7 @@
  */
 package com.intellij.designer.model;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 public interface RadPropertyContext extends PropertyContext {
   @Nullable

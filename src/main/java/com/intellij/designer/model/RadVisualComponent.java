@@ -16,7 +16,7 @@
 package com.intellij.designer.model;
 
 import com.intellij.designer.designSurface.ScalableComponent;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +39,7 @@ public abstract class RadVisualComponent extends RadComponent {
   }
 
   @Override
-  public Rectangle fromModel(@NotNull Component target, @NotNull Rectangle bounds) {
+  public Rectangle fromModel(@Nonnull Component target, @Nonnull Rectangle bounds) {
     if (target != myNativeComponent && myNativeComponent instanceof ScalableComponent) {
       ScalableComponent scalableComponent = (ScalableComponent)myNativeComponent;
       double zoom = scalableComponent.getScale();
@@ -59,7 +59,7 @@ public abstract class RadVisualComponent extends RadComponent {
   }
 
   @Override
-  public Rectangle toModel(@NotNull Component source, @NotNull Rectangle rectangle) {
+  public Rectangle toModel(@Nonnull Component source, @Nonnull Rectangle rectangle) {
     Rectangle bounds = myNativeComponent == source
                        ? new Rectangle(rectangle) : SwingUtilities.convertRectangle(source, rectangle, myNativeComponent);
 
@@ -80,7 +80,7 @@ public abstract class RadVisualComponent extends RadComponent {
   }
 
   @Override
-  public Point fromModel(@NotNull Component target, @NotNull Point point) {
+  public Point fromModel(@Nonnull Component target, @Nonnull Point point) {
     if (target != myNativeComponent && myNativeComponent instanceof ScalableComponent) {
       ScalableComponent scalableComponent = (ScalableComponent)myNativeComponent;
       double zoom = scalableComponent.getScale();
@@ -98,7 +98,7 @@ public abstract class RadVisualComponent extends RadComponent {
   }
 
   @Override
-  public Point toModel(@NotNull Component source, @NotNull Point point) {
+  public Point toModel(@Nonnull Component source, @Nonnull Point point) {
     Point p = myNativeComponent == source
               ? new Point(point) : SwingUtilities.convertPoint(source, point, myNativeComponent);
 
@@ -117,7 +117,7 @@ public abstract class RadVisualComponent extends RadComponent {
   }
 
   @Override
-  public Dimension fromModel(@NotNull Component target, @NotNull Dimension size) {
+  public Dimension fromModel(@Nonnull Component target, @Nonnull Dimension size) {
     size = new Dimension(size);
 
     if (target != myNativeComponent && myNativeComponent instanceof ScalableComponent) {
@@ -134,7 +134,7 @@ public abstract class RadVisualComponent extends RadComponent {
   }
 
   @Override
-  public Dimension toModel(@NotNull Component source, @NotNull Dimension size) {
+  public Dimension toModel(@Nonnull Component source, @Nonnull Dimension size) {
     size = new Dimension(size);
 
     if (myNativeComponent != source && myNativeComponent instanceof ScalableComponent) {

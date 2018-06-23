@@ -17,8 +17,8 @@ package com.intellij.designer.designSurface;
 
 import com.intellij.designer.model.RadComponent;
 import com.intellij.openapi.actionSystem.impl.ActionMenu;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.EventListenerList;
@@ -62,44 +62,44 @@ public abstract class ComponentEditableArea implements EditableArea {
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public List<RadComponent> getSelection() {
     return mySelection;
   }
 
   @Override
-  public boolean isSelected(@NotNull RadComponent component) {
+  public boolean isSelected(@Nonnull RadComponent component) {
     return mySelection.contains(component);
   }
 
   @Override
-  public void select(@NotNull RadComponent component) {
+  public void select(@Nonnull RadComponent component) {
     mySelection = new ArrayList<RadComponent>();
     mySelection.add(component);
     fireSelectionChanged();
   }
 
   @Override
-  public void deselect(@NotNull RadComponent component) {
+  public void deselect(@Nonnull RadComponent component) {
     mySelection.remove(component);
     fireSelectionChanged();
   }
 
   @Override
-  public void appendSelection(@NotNull RadComponent component) {
+  public void appendSelection(@Nonnull RadComponent component) {
     mySelection.remove(component);
     mySelection.add(component);
     fireSelectionChanged();
   }
 
   @Override
-  public void setSelection(@NotNull List<RadComponent> components) {
+  public void setSelection(@Nonnull List<RadComponent> components) {
     mySelection = new ArrayList<RadComponent>(components);
     fireSelectionChanged();
   }
 
   @Override
-  public void deselect(@NotNull Collection<RadComponent> components) {
+  public void deselect(@Nonnull Collection<RadComponent> components) {
     mySelection.removeAll(components);
     fireSelectionChanged();
   }
@@ -129,7 +129,7 @@ public abstract class ComponentEditableArea implements EditableArea {
     ActionMenu.showDescriptionInStatusBar(true, myComponent, text);
   }
 
-  @NotNull
+  @Nonnull
   public JComponent getNativeComponent() {
     return myComponent;
   }

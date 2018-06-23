@@ -21,7 +21,7 @@ import com.intellij.designer.inspection.AbstractQuickFixManager;
 import com.intellij.designer.model.ErrorInfo;
 import com.intellij.designer.model.RadComponent;
 import com.intellij.icons.AllIcons;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,7 +49,7 @@ public final class QuickFixManager extends AbstractQuickFixManager implements Co
     updateHintVisibility();
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected List<ErrorInfo> getErrorInfos() {
     List<RadComponent> selection = myArea.getSelection();

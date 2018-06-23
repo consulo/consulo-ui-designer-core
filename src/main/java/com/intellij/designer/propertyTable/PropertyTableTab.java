@@ -15,7 +15,7 @@
  */
 package com.intellij.designer.propertyTable;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.swing.*;
 
@@ -27,23 +27,23 @@ public final class PropertyTableTab {
   private final String myDescription;
   private final Icon myIcon;
 
-  public PropertyTableTab(@NotNull String key, @NotNull String description, @NotNull Icon icon) {
+  public PropertyTableTab(@Nonnull String key, @Nonnull String description, @Nonnull Icon icon) {
     myKey = key;
     myDescription = description;
     myIcon = icon;
   }
 
-  @NotNull
+  @Nonnull
   public String getKey() {
     return myKey;
   }
 
-  @NotNull
+  @Nonnull
   public String getDescription() {
     return myDescription;
   }
 
-  @NotNull
+  @Nonnull
   public Icon getIcon() {
     return myIcon;
   }

@@ -16,8 +16,8 @@
 package com.intellij.designer.designSurface.tools;
 
 import com.intellij.designer.designSurface.EditableArea;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nullable;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.InputEvent;

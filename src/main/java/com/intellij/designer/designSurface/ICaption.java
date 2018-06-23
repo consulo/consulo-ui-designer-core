@@ -17,7 +17,7 @@ package com.intellij.designer.designSurface;
 
 import com.intellij.designer.model.RadComponent;
 import com.intellij.designer.model.RadLayout;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.List;
 
@@ -25,9 +25,9 @@ import java.util.List;
  * @author Alexander Lobas
  */
 public interface ICaption {
-  @NotNull
+  @Nonnull
   RadLayout getCaptionLayout(EditableArea mainArea, boolean horizontal);
 
-  @NotNull
+  @Nonnull
   List<RadComponent> getCaptionChildren(EditableArea mainArea, boolean horizontal);
 }

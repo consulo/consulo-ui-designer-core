@@ -15,7 +15,7 @@
  */
 package com.intellij.designer;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.designer.palette.PaletteToolWindowManager;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;

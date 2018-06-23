@@ -15,8 +15,9 @@
  */
 package com.intellij.designer.palette;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.designer.AbstractToolWindowManager;
 import com.intellij.designer.DesignerCustomizations;
 import com.intellij.designer.DesignerEditorPanelFacade;
@@ -114,7 +115,7 @@ public class PaletteToolWindowManager extends AbstractToolWindowManager
 		myToolWindowPanel.dispose();
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getComponentName()
 	{
@@ -128,7 +129,7 @@ public class PaletteToolWindowManager extends AbstractToolWindowManager
 	//////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	protected LightToolWindow createContent(@NotNull DesignerEditorPanelFacade designer)
+	protected LightToolWindow createContent(@Nonnull DesignerEditorPanelFacade designer)
 	{
 		PalettePanel palettePanel = new PalettePanel();
 		palettePanel.loadPalette((DesignerEditorPanel) designer);

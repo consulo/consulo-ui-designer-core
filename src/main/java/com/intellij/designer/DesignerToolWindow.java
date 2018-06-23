@@ -20,10 +20,10 @@ import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 
-import org.jetbrains.annotations.NotNull;
 import com.intellij.designer.componentTree.ComponentTree;
 import com.intellij.designer.componentTree.ComponentTreeBuilder;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
@@ -158,7 +158,7 @@ public final class DesignerToolWindow implements DesignerToolWindowContent
 		{
 			@RequiredDispatchThread
 			@Override
-			public void actionPerformed(@NotNull AnActionEvent e)
+			public void actionPerformed(@Nonnull AnActionEvent e)
 			{
 				if(myTreeBuilder != null)
 				{
@@ -171,7 +171,7 @@ public final class DesignerToolWindow implements DesignerToolWindowContent
 		{
 			@RequiredDispatchThread
 			@Override
-			public void actionPerformed(@NotNull AnActionEvent e)
+			public void actionPerformed(@Nonnull AnActionEvent e)
 			{
 				if(myTreeBuilder != null)
 				{

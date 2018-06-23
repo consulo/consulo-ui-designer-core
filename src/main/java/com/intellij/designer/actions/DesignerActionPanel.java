@@ -18,11 +18,11 @@ package com.intellij.designer.actions;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.designer.designSurface.ComponentSelectionListener;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
 import com.intellij.designer.designSurface.EditableArea;
@@ -97,7 +97,7 @@ public class DesignerActionPanel implements DataProvider {
     return toolbar;
   }
 
-  @NotNull
+  @Nonnull
   private ActionGroup createSelectActionGroup(DesignerEditorPanel designer) {
     final DefaultActionGroup group = new DefaultActionGroup("_Select", true);
 
@@ -230,7 +230,7 @@ public class DesignerActionPanel implements DataProvider {
   }
 
   @Override
-  public Object getData(@NotNull Key<?> dataId) {
+  public Object getData(@Nonnull Key<?> dataId) {
     if (PlatformDataKeys.DELETE_ELEMENT_PROVIDER == dataId ||
         PlatformDataKeys.CUT_PROVIDER == dataId ||
         PlatformDataKeys.COPY_PROVIDER == dataId ||

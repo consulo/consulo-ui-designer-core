@@ -35,7 +35,7 @@ import com.intellij.openapi.wm.ex.LayoutFocusTraversalPolicyExt;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.util.ThrowableRunnable;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;

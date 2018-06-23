@@ -25,8 +25,8 @@ import com.intellij.openapi.ui.popup.JBPopup;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.ListPopup;
 import com.intellij.util.PlatformIcons;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -103,7 +103,7 @@ public abstract class AbstractComboBoxAction<T> extends ComboBoxAction {
     update(mySelection, myPresentation == null ? getTemplatePresentation() : myPresentation, false);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected DefaultActionGroup createPopupActionGroup(JComponent button) {
     DefaultActionGroup actionGroup = new DefaultActionGroup();

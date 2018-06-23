@@ -16,12 +16,13 @@
 package com.intellij.designer.clipboard;
 
 import com.intellij.openapi.diagnostic.Logger;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
+
+import javax.annotation.Nullable;
 
 /**
  * @author yole

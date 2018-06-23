@@ -15,11 +15,12 @@
  */
 package com.intellij.designer.componentTree;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.designer.designSurface.DesignerEditorPanel;
 import com.intellij.designer.model.RadComponent;
 import com.intellij.ide.util.treeView.AbstractTreeStructure;
 import com.intellij.ide.util.treeView.NodeDescriptor;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Alexander Lobas
@@ -58,7 +59,7 @@ public final class TreeContentProvider extends AbstractTreeStructure {
     return null;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public NodeDescriptor createDescriptor(Object element, NodeDescriptor parentDescriptor) {
     if (element == myTreeRoot || element instanceof RadComponent) {

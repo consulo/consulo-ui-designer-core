@@ -19,9 +19,10 @@ import com.intellij.designer.designSurface.DesignerEditorPanel;
 import com.intellij.designer.model.RadComponent;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * @author Alexander Lobas

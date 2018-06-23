@@ -16,9 +16,9 @@
 package com.intellij.designer.model;
 
 import com.intellij.designer.designSurface.ComponentTargetFilter;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
 
+import javax.annotation.Nullable;
 import javax.swing.*;
 
 /**
@@ -31,7 +31,7 @@ public class FindComponentVisitor extends RadComponentVisitor {
   private final int myX;
   private final int myY;
 
-  public FindComponentVisitor(@NotNull JComponent component, @Nullable ComponentTargetFilter filter, int x, int y) {
+  public FindComponentVisitor(@Nonnull JComponent component, @Nullable ComponentTargetFilter filter, int x, int y) {
     myComponent = component;
     myFilter = filter;
     myX = x;

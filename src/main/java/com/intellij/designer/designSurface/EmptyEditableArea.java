@@ -18,7 +18,7 @@ package com.intellij.designer.designSurface;
 import com.intellij.designer.designSurface.tools.InputTool;
 import com.intellij.designer.model.RadComponent;
 import com.intellij.openapi.actionSystem.ActionGroup;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import javax.swing.*;
 

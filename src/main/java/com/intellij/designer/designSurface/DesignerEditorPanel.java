@@ -25,13 +25,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import com.intellij.designer.AbstractToolWindowManager;
 import com.intellij.designer.DesignerEditor;
 import com.intellij.designer.DesignerEditorPanelFacade;
@@ -126,7 +126,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 	private final static String ERROR_STACK_CARD = "stack";
 	private final static String ERROR_NO_STACK_CARD = "no_stack";
 
-	@NotNull
+	@Nonnull
 	private final DesignerEditor myEditor;
 	private final Project myProject;
 	private Module myModule;
@@ -177,7 +177,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 
 	protected String myLastExecuteCommand;
 
-	public DesignerEditorPanel(@NotNull DesignerEditor editor, @NotNull Project project, Module module, @NotNull VirtualFile file)
+	public DesignerEditorPanel(@Nonnull DesignerEditor editor, @Nonnull Project project, Module module, @Nonnull VirtualFile file)
 	{
 		myEditor = editor;
 		myProject = project;
@@ -334,7 +334,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 		return new CaptionPanel(this, horizontal, true);
 	}
 
-	protected JScrollPane createScrollPane(@NotNull JLayeredPane content)
+	protected JScrollPane createScrollPane(@Nonnull JLayeredPane content)
 	{
 		JScrollPane scrollPane = ScrollPaneFactory.createScrollPane(content);
 		scrollPane.setBackground(new JBColor(Color.WHITE, UIUtil.getListBackground()));
@@ -402,7 +402,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 		myPanel.add(myErrorPanel, ERROR_CARD);
 	}
 
-	public final void showError(@NotNull String message, @NotNull Throwable e)
+	public final void showError(@Nonnull String message, @Nonnull Throwable e)
 	{
 		if(isProjectClosed())
 		{
@@ -438,7 +438,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 		return new Attachment[]{AttachmentFactory.createAttachment(myFile)};
 	}
 
-	protected abstract void configureError(@NotNull ErrorInfo info);
+	protected abstract void configureError(@Nonnull ErrorInfo info);
 
 	protected void showErrorPage(ErrorInfo info)
 	{
@@ -590,7 +590,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 	//
 	//////////////////////////////////////////////////////////////////////////////////////////
 
-	@NotNull
+	@Nonnull
 	@Override
 	public final Module getModule()
 	{
@@ -612,7 +612,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 	}
 
 
-	@NotNull
+	@Nonnull
 	public final DesignerEditor getEditor()
 	{
 		return myEditor;
@@ -855,7 +855,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 	/**
 	 * Returns a suitable version label from the version attribute from a {@link PaletteItem} version
 	 */
-	@NotNull
+	@Nonnull
 	public String getVersionLabel(@Nullable String version)
 	{
 		return StringUtil.notNullize(version);
@@ -871,7 +871,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 		return new SelectionTool();
 	}
 
-	@NotNull
+	@Nonnull
 	protected abstract ComponentCreationFactory createCreationFactory(PaletteItem paletteItem);
 
 	@Nullable
@@ -887,7 +887,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 	{
 	}
 
-	@NotNull
+	@Nonnull
 	public DesignerEditorState createState()
 	{
 		return new DesignerEditorState(myFile, getZoom());
@@ -899,7 +899,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 	}
 
 	@Override
-	public Object getData(@NotNull Key<?> dataId)
+	public Object getData(@Nonnull Key<?> dataId)
 	{
 		return myActionPanel.getData(dataId);
 	}
@@ -956,7 +956,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 	{
 	}
 
-	@NotNull
+	@Nonnull
 	public TablePanelActionPolicy getTablePanelActionPolicy()
 	{
 		return TablePanelActionPolicy.ALL;
@@ -979,7 +979,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 		return false;
 	}
 
-	public void zoom(@NotNull ZoomType type)
+	public void zoom(@Nonnull ZoomType type)
 	{
 	}
 
@@ -1022,7 +1022,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 	/**
 	 * Size of the scene, in scroll pane view port pixels.
 	 */
-	@NotNull
+	@Nonnull
 	protected Dimension getSceneSize(Component target)
 	{
 		int width = 0;
@@ -1224,7 +1224,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 		}
 
 		@Override
-		public void zoom(@NotNull ZoomType type)
+		public void zoom(@Nonnull ZoomType type)
 		{
 			DesignerEditorPanel.this.zoom(type);
 		}
@@ -1344,7 +1344,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 			}
 		}
 
-		@NotNull
+		@Nonnull
 		@Override
 		protected DefaultActionGroup createPopupActionGroup(JComponent button)
 		{

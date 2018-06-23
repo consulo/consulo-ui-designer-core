@@ -21,11 +21,12 @@ import com.intellij.designer.designSurface.ZoomProvider;
 import com.intellij.designer.propertyTable.InplaceContext;
 import com.intellij.util.ThrowableRunnable;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * @author Alexander Lobas

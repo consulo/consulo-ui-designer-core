@@ -22,13 +22,14 @@ import com.intellij.designer.designSurface.OperationContext;
 import com.intellij.designer.model.RadComponent;
 import com.intellij.designer.utils.Cursors;
 import com.intellij.designer.utils.Position;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * @author Alexander Lobas

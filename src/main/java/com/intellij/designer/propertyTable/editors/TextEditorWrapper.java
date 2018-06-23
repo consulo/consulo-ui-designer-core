@@ -18,9 +18,9 @@ package com.intellij.designer.propertyTable.editors;
 import com.intellij.designer.model.PropertiesContainer;
 import com.intellij.designer.model.PropertyContext;
 import com.intellij.designer.propertyTable.InplaceContext;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
 
+import javax.annotation.Nullable;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -67,7 +67,7 @@ public class TextEditorWrapper extends TextEditor {
     myComponent.add(myTextField);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public JComponent getComponent(@Nullable PropertiesContainer container,
                                  @Nullable PropertyContext context,

@@ -26,8 +26,8 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.codeInsight.daemon.impl.SeverityRegistrar;
 import com.intellij.designer.DesignerBundle;
 import com.intellij.designer.designSurface.ComponentSelectionListener;
@@ -54,7 +54,7 @@ public class RadPropertyTable extends PropertyTable implements DataProvider, Com
   private QuickFixManager myQuickFixManager;
   private PropertyTablePanel myPropertyTablePanel;
 
-  public RadPropertyTable(@NotNull Project project) {
+  public RadPropertyTable(@Nonnull Project project) {
     setShowVerticalLines(true);
     setIntercellSpacing(new Dimension(1, 1));
 
@@ -104,12 +104,12 @@ public class RadPropertyTable extends PropertyTable implements DataProvider, Com
   }
 
   @Override
-  protected List<ErrorInfo> getErrors(@NotNull PropertiesContainer container) {
+  protected List<ErrorInfo> getErrors(@Nonnull PropertiesContainer container) {
     return container instanceof RadComponent ? RadComponent.getError((RadComponent)container) : Collections.<ErrorInfo>emptyList();
   }
 
-  @NotNull
-  protected TextAttributesKey getErrorAttributes(@NotNull HighlightSeverity severity) {
+  @Nonnull
+  protected TextAttributesKey getErrorAttributes(@Nonnull HighlightSeverity severity) {
     return SeverityRegistrar.getSeverityRegistrar(myProject).getHighlightInfoTypeBySeverity(severity).getAttributesKey();
   }
 

@@ -21,7 +21,7 @@ import com.intellij.designer.model.RadComponent;
 import com.intellij.designer.propertyTable.InplaceContext;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPopupMenu;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import java.awt.*;
 import java.awt.event.InputEvent;

@@ -21,12 +21,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.swing.JScrollPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.designer.actions.CommonEditActionsProvider;
 import com.intellij.designer.designSurface.tools.InputTool;
 import com.intellij.designer.model.FindComponentVisitor;
@@ -232,7 +232,7 @@ public class CaptionPanel extends JBLayeredPane implements DataProvider, DeleteP
 	}
 
 	@Override
-	public Object getData(@NotNull Key<?> dataId)
+	public Object getData(@Nonnull Key<?> dataId)
 	{
 		if(PlatformDataKeys.DELETE_ELEMENT_PROVIDER == dataId)
 		{
@@ -242,13 +242,13 @@ public class CaptionPanel extends JBLayeredPane implements DataProvider, DeleteP
 	}
 
 	@Override
-	public boolean canDeleteElement(@NotNull DataContext dataContext)
+	public boolean canDeleteElement(@Nonnull DataContext dataContext)
 	{
 		return myActionsProvider.canDeleteElement(dataContext);
 	}
 
 	@Override
-	public void deleteElement(@NotNull DataContext dataContext)
+	public void deleteElement(@Nonnull DataContext dataContext)
 	{
 		myActionsProvider.deleteElement(dataContext);
 	}

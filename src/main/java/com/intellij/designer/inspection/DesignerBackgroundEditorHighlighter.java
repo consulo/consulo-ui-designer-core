@@ -15,10 +15,11 @@
  */
 package com.intellij.designer.inspection;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.codeHighlighting.BackgroundEditorHighlighter;
 import com.intellij.codeHighlighting.HighlightingPass;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Alexander Lobas
@@ -30,13 +31,13 @@ public final class DesignerBackgroundEditorHighlighter implements BackgroundEdit
     myHighlightingPasses = new HighlightingPass[]{new DesignerHighlightingPass(designer)};
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public HighlightingPass[] createPassesForEditor() {
     return myHighlightingPasses;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public HighlightingPass[] createPassesForVisibleArea() {
     return HighlightingPass.EMPTY_ARRAY;

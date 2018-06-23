@@ -19,7 +19,7 @@ import com.intellij.codeHighlighting.HighlightingPass;
 import com.intellij.designer.DesignerToolWindowManager;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
 import com.intellij.openapi.progress.ProgressIndicator;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * @author Alexander Lobas
@@ -32,7 +32,7 @@ public final class DesignerHighlightingPass implements HighlightingPass {
   }
 
   @Override
-  public void collectInformation(@NotNull ProgressIndicator progress) {
+  public void collectInformation(@Nonnull ProgressIndicator progress) {
     myDesigner.loadInspections(progress);
   }
 

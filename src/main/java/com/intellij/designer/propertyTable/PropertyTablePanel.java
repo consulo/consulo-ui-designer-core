@@ -23,6 +23,7 @@ import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.annotation.Nullable;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,8 +31,8 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import com.intellij.designer.DesignerBundle;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
 import com.intellij.designer.designSurface.EditableArea;
@@ -203,7 +204,7 @@ public final class PropertyTablePanel extends JPanel implements ListSelectionLis
     return myCurrentTab;
   }
 
-  public void setCurrentTab(@NotNull PropertyTableTab currentTab) {
+  public void setCurrentTab(@Nonnull PropertyTableTab currentTab) {
     myCurrentTab = currentTab;
 
     for (Component component : myTabPanel.getComponents()) {

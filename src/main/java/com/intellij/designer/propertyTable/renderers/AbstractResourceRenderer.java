@@ -15,6 +15,17 @@
  */
 package com.intellij.designer.propertyTable.renderers;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
+
 import com.intellij.designer.model.PropertiesContainer;
 import com.intellij.designer.model.PropertyContext;
 import com.intellij.designer.model.RadComponent;
@@ -22,11 +33,6 @@ import com.intellij.designer.propertyTable.PropertyRenderer;
 import com.intellij.designer.propertyTable.PropertyTable;
 import com.intellij.ui.SimpleColoredComponent;
 import com.intellij.util.ui.EmptyIcon;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * @author Alexander Lobas
@@ -42,7 +48,7 @@ public abstract class AbstractResourceRenderer<T> implements PropertyRenderer {
     }
   };
 
-  @NotNull
+  @Nonnull
   @Override
   public JComponent getComponent(@Nullable PropertiesContainer container,
                                  PropertyContext context,

@@ -24,8 +24,8 @@ import com.intellij.designer.designSurface.tools.InputTool;
 import com.intellij.designer.propertyTable.PropertyTable;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -92,7 +92,7 @@ public abstract class RadComponent extends PropertiesContainer {
     return getChildren().toArray();
   }
 
-  public void add(@NotNull RadComponent component, @Nullable RadComponent insertBefore) {
+  public void add(@Nonnull RadComponent component, @Nullable RadComponent insertBefore) {
     component.setParent(this);
 
     int index;
@@ -111,7 +111,7 @@ public abstract class RadComponent extends PropertiesContainer {
     }
   }
 
-  public void remove(@NotNull RadComponent component) {
+  public void remove(@Nonnull RadComponent component) {
     getChildren().remove(component);
 
     if (myLayout != null) {
@@ -141,7 +141,7 @@ public abstract class RadComponent extends PropertiesContainer {
    * Returns true if this component is of the same logical type as the given other component.
    * This is used to for example select "Select Same Type".
    */
-  public boolean isSameType(@NotNull RadComponent other) {
+  public boolean isSameType(@Nonnull RadComponent other) {
     return other.getClass() == this.getClass();
   }
 
@@ -195,7 +195,7 @@ public abstract class RadComponent extends PropertiesContainer {
    * @param rectangle the model rectangle to convert
    * @return the rectangle converted to the coordinate system of the target
    */
-  public Rectangle fromModel(@NotNull Component target, @NotNull Rectangle rectangle) {
+  public Rectangle fromModel(@Nonnull Component target, @Nonnull Rectangle rectangle) {
     return null;
   }
 
@@ -209,7 +209,7 @@ public abstract class RadComponent extends PropertiesContainer {
    * @param rectangle the rectangle to be converted into model coordinates
    * @return the rectangle converted to the model coordinate system
    */
-  public Rectangle toModel(@NotNull Component source, @NotNull Rectangle rectangle) {
+  public Rectangle toModel(@Nonnull Component source, @Nonnull Rectangle rectangle) {
     return null;
   }
 
@@ -225,7 +225,7 @@ public abstract class RadComponent extends PropertiesContainer {
    * @param point  the model point to convert
    * @return the point converted to the coordinate system of the target
    */
-  public Point fromModel(@NotNull Component target, @NotNull Point point) {
+  public Point fromModel(@Nonnull Component target, @Nonnull Point point) {
     return null;
   }
 
@@ -239,7 +239,7 @@ public abstract class RadComponent extends PropertiesContainer {
    * @param point  the point to be converted into model coordinates
    * @return the point converted to the model coordinate system
    */
-  public Point toModel(@NotNull Component source, @NotNull Point point) {
+  public Point toModel(@Nonnull Component source, @Nonnull Point point) {
     return null;
   }
 
@@ -255,7 +255,7 @@ public abstract class RadComponent extends PropertiesContainer {
    * @param size   the model dimension to convert
    * @return the size converted to the coordinate system of the target
    */
-  public Dimension fromModel(@NotNull Component target, @NotNull Dimension size) {
+  public Dimension fromModel(@Nonnull Component target, @Nonnull Dimension size) {
     return null;
   }
 
@@ -269,7 +269,7 @@ public abstract class RadComponent extends PropertiesContainer {
    * @param size   the dimension to be converted into model coordinates
    * @return the size converted to the model coordinate system
    */
-  public Dimension toModel(@NotNull Component source, @NotNull Dimension size) {
+  public Dimension toModel(@Nonnull Component source, @Nonnull Dimension size) {
     return null;
   }
 
@@ -387,16 +387,16 @@ public abstract class RadComponent extends PropertiesContainer {
   }
 
   @SuppressWarnings("unchecked")
-  public final <T> T getClientProperty(@NotNull String key) {
+  public final <T> T getClientProperty(@Nonnull String key) {
     return (T)myClientProperties.get(key);
   }
 
   @SuppressWarnings("unchecked")
-  public final <T> T extractClientProperty(@NotNull String key) {
+  public final <T> T extractClientProperty(@Nonnull String key) {
     return (T)myClientProperties.remove(key);
   }
 
-  public final void setClientProperty(@NotNull Object key, Object value) {
+  public final void setClientProperty(@Nonnull Object key, Object value) {
     myClientProperties.put(key, value);
   }
 
@@ -499,8 +499,8 @@ public abstract class RadComponent extends PropertiesContainer {
    * @param components the components to be grouped
    * @return a map from parents (or null) to a list of components with the corresponding parent
    */
-  @NotNull
-  public static Map<RadComponent, List<RadComponent>> groupSiblings(@NotNull List<? extends RadComponent> components) {
+  @Nonnull
+  public static Map<RadComponent, List<RadComponent>> groupSiblings(@Nonnull List<? extends RadComponent> components) {
     Map<RadComponent, List<RadComponent>> siblingLists = new HashMap<RadComponent, List<RadComponent>>();
 
     if (components.isEmpty()) {

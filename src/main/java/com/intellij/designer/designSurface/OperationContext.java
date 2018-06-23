@@ -17,11 +17,12 @@ package com.intellij.designer.designSurface;
 
 import com.intellij.designer.DesignerBundle;
 import com.intellij.designer.model.RadComponent;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * @author Alexander Lobas

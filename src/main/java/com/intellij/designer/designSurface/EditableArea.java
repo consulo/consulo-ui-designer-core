@@ -19,10 +19,10 @@ import java.awt.Cursor;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.designer.designSurface.tools.InputTool;
 import com.intellij.designer.model.RadComponent;
 import com.intellij.openapi.actionSystem.ActionGroup;
@@ -44,20 +44,20 @@ public interface EditableArea {
 
   void removeSelectionListener(ComponentSelectionListener listener);
 
-  @NotNull
+  @Nonnull
   List<RadComponent> getSelection();
 
-  boolean isSelected(@NotNull RadComponent component);
+  boolean isSelected(@Nonnull RadComponent component);
 
-  void select(@NotNull RadComponent component);
+  void select(@Nonnull RadComponent component);
 
-  void deselect(@NotNull RadComponent component);
+  void deselect(@Nonnull RadComponent component);
 
-  void appendSelection(@NotNull RadComponent component);
+  void appendSelection(@Nonnull RadComponent component);
 
-  void setSelection(@NotNull List<RadComponent> components);
+  void setSelection(@Nonnull List<RadComponent> components);
 
-  void deselect(@NotNull Collection<RadComponent> components);
+  void deselect(@Nonnull Collection<RadComponent> components);
 
   void deselectAll();
 
@@ -73,7 +73,7 @@ public interface EditableArea {
 
   void setDescription(@Nullable String text);
 
-  @NotNull
+  @Nonnull
   JComponent getNativeComponent();
 
   @Nullable

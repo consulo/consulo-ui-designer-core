@@ -19,7 +19,7 @@ import com.intellij.designer.palette.DefaultPaletteItem;
 import com.intellij.designer.propertyTable.IPropertyDecorator;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.util.ArrayUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.swing.*;
 import java.util.Collections;
@@ -73,7 +73,7 @@ public class MetaModel {
     return myTag;
   }
 
-  public boolean isTag(@NotNull String tag) {
+  public boolean isTag(@Nonnull String tag) {
     return tag.equals(myTag);
   }
 
@@ -121,7 +121,7 @@ public class MetaModel {
     return myPaletteItem;
   }
 
-  public void setPaletteItem(@NotNull DefaultPaletteItem paletteItem) {
+  public void setPaletteItem(@Nonnull DefaultPaletteItem paletteItem) {
     myPaletteItem = paletteItem;
     myPaletteItem.setMetaModel(this);
   }

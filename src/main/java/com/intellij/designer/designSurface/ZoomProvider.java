@@ -15,7 +15,7 @@
  */
 package com.intellij.designer.designSurface;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public interface ZoomProvider {
   /**
@@ -26,7 +26,7 @@ public interface ZoomProvider {
   /**
    * Zoom the editable area.
    */
-  void zoom(@NotNull ZoomType type);
+  void zoom(@Nonnull ZoomType type);
 
   /**
    * Sets the zoom level. Note that this should be 1, not 100 (percent), for an image at its actual size.

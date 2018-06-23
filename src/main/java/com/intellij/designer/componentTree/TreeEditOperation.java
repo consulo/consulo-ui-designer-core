@@ -20,10 +20,11 @@ import com.intellij.designer.designSurface.FeedbackTreeLayer;
 import com.intellij.designer.designSurface.OperationContext;
 import com.intellij.designer.model.RadComponent;
 import com.intellij.util.ArrayUtil;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * @author Alexander Lobas

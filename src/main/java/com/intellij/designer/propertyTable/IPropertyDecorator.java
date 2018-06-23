@@ -15,12 +15,13 @@
  */
 package com.intellij.designer.propertyTable;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.designer.model.MetaModel;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Alexander Lobas
  */
 public interface IPropertyDecorator {
-  void decorate(@NotNull MetaModel model);
+  void decorate(@Nonnull MetaModel model);
 }

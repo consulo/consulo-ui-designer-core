@@ -19,10 +19,11 @@ import java.awt.datatransfer.DataFlavor;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.jdom.Element;
 import org.jdom.output.XMLOutputter;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import com.intellij.designer.DesignerBundle;
 import com.intellij.designer.clipboard.SimpleTransferable;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
@@ -72,7 +73,7 @@ public class CommonEditActionsProvider implements DeleteProvider, CopyProvider, 
 	//////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public boolean canDeleteElement(@NotNull DataContext dataContext)
+	public boolean canDeleteElement(@Nonnull DataContext dataContext)
 	{
 		if(myDesigner.getInplaceEditingLayer().isEditing())
 		{
@@ -94,7 +95,7 @@ public class CommonEditActionsProvider implements DeleteProvider, CopyProvider, 
 	}
 
 	@Override
-	public void deleteElement(final @NotNull DataContext dataContext)
+	public void deleteElement(final @Nonnull DataContext dataContext)
 	{
 		myDesigner.getToolProvider().execute(new ThrowableRunnable<Exception>()
 		{
@@ -117,7 +118,7 @@ public class CommonEditActionsProvider implements DeleteProvider, CopyProvider, 
 		}, DesignerBundle.message("command.delete.selection"), true);
 	}
 
-	private static void handleDeletion(@NotNull List<RadComponent> components) throws Exception
+	private static void handleDeletion(@Nonnull List<RadComponent> components) throws Exception
 	{
 		// Segment the deleted components into lists of siblings
 		Map<RadComponent, List<RadComponent>> siblingLists = RadComponent.groupSiblings(components);
@@ -213,13 +214,13 @@ public class CommonEditActionsProvider implements DeleteProvider, CopyProvider, 
 	//////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public boolean isCopyVisible(@NotNull DataContext dataContext)
+	public boolean isCopyVisible(@Nonnull DataContext dataContext)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean isCopyEnabled(@NotNull DataContext dataContext)
+	public boolean isCopyEnabled(@Nonnull DataContext dataContext)
 	{
 		if(myDesigner.getInplaceEditingLayer().isEditing())
 		{
@@ -243,7 +244,7 @@ public class CommonEditActionsProvider implements DeleteProvider, CopyProvider, 
 	}
 
 	@Override
-	public void performCopy(@NotNull DataContext dataContext)
+	public void performCopy(@Nonnull DataContext dataContext)
 	{
 		doCopy(dataContext);
 	}
@@ -289,13 +290,13 @@ public class CommonEditActionsProvider implements DeleteProvider, CopyProvider, 
 	//////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public boolean isPastePossible(@NotNull DataContext dataContext)
+	public boolean isPastePossible(@Nonnull DataContext dataContext)
 	{
 		return isPasteEnabled(dataContext);
 	}
 
 	@Override
-	public boolean isPasteEnabled(@NotNull DataContext dataContext)
+	public boolean isPasteEnabled(@Nonnull DataContext dataContext)
 	{
 		return !myDesigner.getInplaceEditingLayer().isEditing() && getSerializedComponentData() != null;
 	}
@@ -324,7 +325,7 @@ public class CommonEditActionsProvider implements DeleteProvider, CopyProvider, 
 	}
 
 	@Override
-	public void performPaste(@NotNull DataContext dataContext)
+	public void performPaste(@Nonnull DataContext dataContext)
 	{
 		ComponentPasteFactory factory = myDesigner.createPasteFactory(getSerializedComponentData());
 		if(factory != null)
@@ -340,19 +341,19 @@ public class CommonEditActionsProvider implements DeleteProvider, CopyProvider, 
 	//////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public boolean isCutVisible(@NotNull DataContext dataContext)
+	public boolean isCutVisible(@Nonnull DataContext dataContext)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean isCutEnabled(@NotNull DataContext dataContext)
+	public boolean isCutEnabled(@Nonnull DataContext dataContext)
 	{
 		return isCopyEnabled(dataContext) && canDeleteElement(dataContext);
 	}
 
 	@Override
-	public void performCut(@NotNull DataContext dataContext)
+	public void performCut(@Nonnull DataContext dataContext)
 	{
 		if(doCopy(dataContext))
 		{

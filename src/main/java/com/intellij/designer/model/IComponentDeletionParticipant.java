@@ -1,6 +1,6 @@
 package com.intellij.designer.model;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.List;
 
@@ -18,5 +18,5 @@ public interface IComponentDeletionParticipant {
    *         a RelativeLayout handler could remove constraints pointing to now deleted components,
    *         but leave the overall deletion of the elements to the core designer.
    */
-  boolean deleteChildren(@NotNull RadComponent parent, @NotNull List<RadComponent> deleted) throws Exception;
+  boolean deleteChildren(@Nonnull RadComponent parent, @Nonnull List<RadComponent> deleted) throws Exception;
 }

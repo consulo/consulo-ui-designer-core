@@ -15,9 +15,9 @@
  */
 package com.intellij.designer.utils;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.awt.*;
+
+import javax.annotation.Nullable;
 
 /**
  * @author Alexander Lobas

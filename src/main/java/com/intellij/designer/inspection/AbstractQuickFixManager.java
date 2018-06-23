@@ -37,8 +37,8 @@ import com.intellij.util.Alarm;
 import com.intellij.util.IJSwingUtilities;
 import com.intellij.util.ThrowableRunnable;
 import com.intellij.util.ui.EmptyIcon;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -239,7 +239,7 @@ public abstract class AbstractQuickFixManager {
   /**
    * @return error info for the current {@link #myComponent} state.
    */
-  @NotNull
+  @Nonnull
   protected abstract List<ErrorInfo> getErrorInfos();
 
   /**
@@ -267,7 +267,7 @@ public abstract class AbstractQuickFixManager {
       return AllIcons.Actions.RealIntentionBulb;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getTextFor(ErrorInfo value) {
       return value.getName();
@@ -303,7 +303,7 @@ public abstract class AbstractQuickFixManager {
       return value.getIcon();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getTextFor(QuickFix value) {
       return value.getName();

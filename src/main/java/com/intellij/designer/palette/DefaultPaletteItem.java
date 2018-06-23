@@ -18,7 +18,7 @@ package com.intellij.designer.palette;
 import com.intellij.designer.model.MetaModel;
 import com.intellij.openapi.util.IconLoader;
 import org.jdom.Element;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import javax.swing.*;
 

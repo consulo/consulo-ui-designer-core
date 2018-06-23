@@ -17,7 +17,7 @@ package com.intellij.designer.model;
 
 import com.intellij.designer.designSurface.*;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.List;

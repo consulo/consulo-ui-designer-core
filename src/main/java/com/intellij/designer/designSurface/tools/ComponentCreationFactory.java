@@ -15,13 +15,14 @@
  */
 package com.intellij.designer.designSurface.tools;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.designer.model.RadComponent;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Alexander Lobas
  */
 public interface ComponentCreationFactory {
-  @NotNull
+  @Nonnull
   RadComponent create() throws Exception;
 }

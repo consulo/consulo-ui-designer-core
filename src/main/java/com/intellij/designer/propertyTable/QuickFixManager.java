@@ -17,7 +17,7 @@ package com.intellij.designer.propertyTable;
 
 import com.intellij.designer.inspection.AbstractQuickFixManager;
 import com.intellij.designer.model.ErrorInfo;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -42,7 +42,7 @@ public final class QuickFixManager extends AbstractQuickFixManager implements Li
     updateHintVisibility();
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected List<ErrorInfo> getErrorInfos() {
     RadPropertyTable component = (RadPropertyTable)myComponent;

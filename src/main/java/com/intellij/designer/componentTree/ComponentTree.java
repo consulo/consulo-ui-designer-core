@@ -22,6 +22,8 @@ import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JTree;
@@ -32,8 +34,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import com.intellij.codeHighlighting.HighlightDisplayLevel;
 import com.intellij.codeInsight.daemon.impl.SeverityRegistrar;
 import com.intellij.designer.actions.DesignerActionPanel;
@@ -116,7 +116,7 @@ public final class ComponentTree extends Tree implements DataProvider {
   }
 
   @Override
-  public Object getData(@NotNull Key<?> dataId) {
+  public Object getData(@Nonnull Key<?> dataId) {
     if (EditableArea.DATA_KEY == dataId) {
       return myArea;
     }

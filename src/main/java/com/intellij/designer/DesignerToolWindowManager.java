@@ -15,8 +15,8 @@
  */
 package com.intellij.designer;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
@@ -123,7 +123,7 @@ public final class DesignerToolWindowManager extends AbstractToolWindowManager
 		myToolWindowContent.dispose();
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getComponentName()
 	{
@@ -137,7 +137,7 @@ public final class DesignerToolWindowManager extends AbstractToolWindowManager
 	//////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
-	protected LightToolWindow createContent(@NotNull DesignerEditorPanelFacade designer)
+	protected LightToolWindow createContent(@Nonnull DesignerEditorPanelFacade designer)
 	{
 		DesignerToolWindow toolWindowContent = new DesignerToolWindow(myProject, false);
 		toolWindowContent.update((DesignerEditorPanel) designer);

@@ -17,9 +17,10 @@ package com.intellij.designer.designSurface;
 
 import com.intellij.designer.designSurface.tools.InputTool;
 import com.intellij.designer.model.RadComponent;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
+
+import javax.annotation.Nullable;
 
 /**
  * @author Alexander Lobas

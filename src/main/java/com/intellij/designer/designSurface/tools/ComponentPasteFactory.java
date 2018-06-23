@@ -16,7 +16,7 @@
 package com.intellij.designer.designSurface.tools;
 
 import com.intellij.designer.model.RadComponent;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.List;
 
@@ -24,6 +24,6 @@ import java.util.List;
  * @author Alexander Lobas
  */
 public interface ComponentPasteFactory {
-  @NotNull
+  @Nonnull
   List<RadComponent> create() throws Exception;
 }

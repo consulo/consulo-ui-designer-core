@@ -15,8 +15,9 @@
  */
 package com.intellij.designer;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorState;
@@ -77,8 +78,8 @@ public class DesignerEditorState implements FileEditorState
 	/**
 	 * @see com.intellij.openapi.fileEditor.FileEditorProvider#readState(org.jdom.Element, com.intellij.openapi.project.Project, com.intellij.openapi.vfs.VirtualFile)
 	 */
-	@NotNull
-	public static FileEditorState readState(@NotNull Element sourceElement, @NotNull VirtualFile file, double defaultZoom)
+	@Nonnull
+	public static FileEditorState readState(@Nonnull Element sourceElement, @Nonnull VirtualFile file, double defaultZoom)
 	{
 		double zoom = defaultZoom;
 
@@ -97,7 +98,7 @@ public class DesignerEditorState implements FileEditorState
 	/**
 	 * @see com.intellij.openapi.fileEditor.FileEditorProvider#writeState(com.intellij.openapi.fileEditor.FileEditorState, com.intellij.openapi.project.Project, org.jdom.Element)
 	 */
-	public static void writeState(@NotNull FileEditorState state, @NotNull Element targetElement)
+	public static void writeState(@Nonnull FileEditorState state, @Nonnull Element targetElement)
 	{
 		targetElement.setAttribute(DESIGNER_ZOOM, Double.toString(((DesignerEditorState) state).getZoom()));
 	}

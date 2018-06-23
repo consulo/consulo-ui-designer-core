@@ -21,7 +21,7 @@ import com.intellij.designer.designSurface.EditableArea;
 import com.intellij.designer.designSurface.OperationContext;
 import com.intellij.designer.model.RadComponent;
 import com.intellij.designer.model.RadLayout;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import java.awt.event.KeyEvent;
 import java.util.Collections;

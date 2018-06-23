@@ -15,6 +15,8 @@
  */
 package com.intellij.designer.designSurface;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
@@ -22,7 +24,6 @@ import com.intellij.psi.PsiTreeChangeAdapter;
 import com.intellij.psi.PsiTreeChangeEvent;
 import com.intellij.util.Alarm;
 import com.intellij.util.containers.ComparatorUtil;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Alexander Lobas
@@ -138,32 +139,32 @@ public class ExternalPSIChangeListener extends PsiTreeChangeAdapter {
   //////////////////////////////////////////////////////////////////////////////////////////
 
   @Override
-  public void childAdded(@NotNull PsiTreeChangeEvent event) {
+  public void childAdded(@Nonnull PsiTreeChangeEvent event) {
     updatePsi(event);
   }
 
   @Override
-  public void childRemoved(@NotNull PsiTreeChangeEvent event) {
+  public void childRemoved(@Nonnull PsiTreeChangeEvent event) {
     updatePsi(event);
   }
 
   @Override
-  public void childReplaced(@NotNull PsiTreeChangeEvent event) {
+  public void childReplaced(@Nonnull PsiTreeChangeEvent event) {
     updatePsi(event);
   }
 
   @Override
-  public void childMoved(@NotNull PsiTreeChangeEvent event) {
+  public void childMoved(@Nonnull PsiTreeChangeEvent event) {
     updatePsi(event);
   }
 
   @Override
-  public void childrenChanged(@NotNull PsiTreeChangeEvent event) {
+  public void childrenChanged(@Nonnull PsiTreeChangeEvent event) {
     updatePsi(event);
   }
 
   @Override
-  public void propertyChanged(@NotNull PsiTreeChangeEvent event) {
+  public void propertyChanged(@Nonnull PsiTreeChangeEvent event) {
     updatePsi(event);
   }
 }

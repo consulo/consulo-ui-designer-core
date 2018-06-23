@@ -24,9 +24,9 @@ import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.util.ArrayUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
 
+import javax.annotation.Nullable;
 import javax.swing.*;
 import javax.swing.event.EventListenerList;
 import javax.swing.event.TreeSelectionEvent;
@@ -91,43 +91,43 @@ public final class TreeEditableArea implements EditableArea, FeedbackTreeLayer, 
     }
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public List<RadComponent> getSelection() {
     return new ArrayList<RadComponent>(getRawSelection());
   }
 
   @Override
-  public boolean isSelected(@NotNull RadComponent component) {
+  public boolean isSelected(@Nonnull RadComponent component) {
     return getRawSelection().contains(component);
   }
 
   @Override
-  public void select(@NotNull RadComponent component) {
+  public void select(@Nonnull RadComponent component) {
     setRawSelection(component);
   }
 
   @Override
-  public void deselect(@NotNull RadComponent component) {
+  public void deselect(@Nonnull RadComponent component) {
     Collection<RadComponent> selection = getRawSelection();
     selection.remove(component);
     setRawSelection(selection);
   }
 
   @Override
-  public void appendSelection(@NotNull RadComponent component) {
+  public void appendSelection(@Nonnull RadComponent component) {
     Collection<RadComponent> selection = getRawSelection();
     selection.add(component);
     setRawSelection(selection);
   }
 
   @Override
-  public void setSelection(@NotNull List<RadComponent> components) {
+  public void setSelection(@Nonnull List<RadComponent> components) {
     setRawSelection(components);
   }
 
   @Override
-  public void deselect(@NotNull Collection<RadComponent> components) {
+  public void deselect(@Nonnull Collection<RadComponent> components) {
     Collection<RadComponent> selection = getRawSelection();
     selection.removeAll(components);
     setRawSelection(selection);
@@ -193,7 +193,7 @@ public final class TreeEditableArea implements EditableArea, FeedbackTreeLayer, 
   public void setDescription(@Nullable String text) {
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public JComponent getNativeComponent() {
     return myTree;

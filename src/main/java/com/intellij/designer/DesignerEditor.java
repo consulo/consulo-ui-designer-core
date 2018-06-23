@@ -27,8 +27,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.UserDataHolderBase;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.LightVirtualFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import javax.swing.*;
 import java.beans.PropertyChangeListener;
@@ -55,14 +55,14 @@ public abstract class DesignerEditor extends UserDataHolderBase implements FileE
     return ModuleUtilCore.findModuleForFile(file, project);
   }
 
-  @NotNull
+  @Nonnull
   protected abstract DesignerEditorPanel createDesignerPanel(Project project, Module module, VirtualFile file);
 
   public final DesignerEditorPanel getDesignerPanel() {
     return myDesignerPanel;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public final JComponent getComponent() {
     return myDesignerPanel;
@@ -99,21 +99,21 @@ public abstract class DesignerEditor extends UserDataHolderBase implements FileE
   }
 
   @Override
-  @NotNull
-  public FileEditorState getState(@NotNull FileEditorStateLevel level) {
+  @Nonnull
+  public FileEditorState getState(@Nonnull FileEditorStateLevel level) {
     return myDesignerPanel.createState();
   }
 
   @Override
-  public void setState(@NotNull FileEditorState state) {
+  public void setState(@Nonnull FileEditorState state) {
   }
 
   @Override
-  public void addPropertyChangeListener(@NotNull PropertyChangeListener listener) {
+  public void addPropertyChangeListener(@Nonnull PropertyChangeListener listener) {
   }
 
   @Override
-  public void removePropertyChangeListener(@NotNull PropertyChangeListener listener) {
+  public void removePropertyChangeListener(@Nonnull PropertyChangeListener listener) {
   }
 
   @Override

@@ -15,7 +15,8 @@
  */
 package com.intellij.designer;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.extensions.ExtensionPointName;
 import com.intellij.openapi.wm.ToolWindowAnchor;
 
@@ -25,7 +26,7 @@ public abstract class DesignerCustomizations {
   /**
    * Default location of the palette
    */
-  @NotNull
+  @Nonnull
   public ToolWindowAnchor getPaletteAnchor() {
     return ToolWindowAnchor.RIGHT;
   }
@@ -33,7 +34,7 @@ public abstract class DesignerCustomizations {
   /**
    * Default location of the designer/structure window
    */
-  @NotNull
+  @Nonnull
   public ToolWindowAnchor getStructureAnchor() {
     return ToolWindowAnchor.LEFT;
   }
