@@ -1,1 +1,1 @@
-![Build Status](http://must-be.org/vulcan/statusImage?name=consulo-ui-designer-core)
+[![Build Status](https://ci.consulo.io/job/consulo-ui-designer-core/badge/icon)](https://ci.consulo.io/job/consulo-ui-designer-core/)
