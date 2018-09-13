@@ -1319,7 +1319,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 
 			Presentation presentation = getTemplatePresentation();
 			presentation.setDescription("Warnings");
-			presentation.setIcon(AllIcons.Ide.Warning_notifications);
+			presentation.setIcon(AllIcons.Ide.Notification.WarningEvents);
 		}
 
 		public void show(List<FixableMessageInfo> messages)
