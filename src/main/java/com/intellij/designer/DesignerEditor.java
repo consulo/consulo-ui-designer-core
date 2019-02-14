@@ -15,6 +15,10 @@
  */
 package com.intellij.designer;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.JComponent;
+
 import com.intellij.designer.designSurface.DesignerEditorPanel;
 import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.openapi.fileEditor.FileEditor;
@@ -27,11 +31,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.UserDataHolderBase;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.LightVirtualFile;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import javax.swing.*;
-import java.beans.PropertyChangeListener;
+import kava.beans.PropertyChangeListener;
 
 /**
  * @author Alexander Lobas
