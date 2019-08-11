@@ -15,50 +15,14 @@
  */
 package com.intellij.designer.designSurface;
 
-import java.awt.*;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.swing.*;
-import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
-
-import org.jetbrains.annotations.NonNls;
-import com.intellij.designer.AbstractToolWindowManager;
-import com.intellij.designer.DesignerEditor;
-import com.intellij.designer.DesignerEditorPanelFacade;
-import com.intellij.designer.DesignerEditorState;
-import com.intellij.designer.DesignerToolWindowContent;
-import com.intellij.designer.DesignerToolWindowManager;
-import com.intellij.designer.LightFillLayout;
-import com.intellij.designer.ModuleProvider;
-import com.intellij.designer.PaletteToolWindowContent;
+import com.intellij.designer.*;
 import com.intellij.designer.actions.AbstractComboBoxAction;
 import com.intellij.designer.actions.CommonEditActionsProvider;
 import com.intellij.designer.actions.DesignerActionPanel;
 import com.intellij.designer.componentTree.TreeComponentDecorator;
 import com.intellij.designer.componentTree.TreeEditableArea;
-import com.intellij.designer.designSurface.tools.ComponentCreationFactory;
-import com.intellij.designer.designSurface.tools.ComponentPasteFactory;
-import com.intellij.designer.designSurface.tools.CreationTool;
-import com.intellij.designer.designSurface.tools.InputTool;
-import com.intellij.designer.designSurface.tools.MarqueeTracker;
-import com.intellij.designer.designSurface.tools.PasteTool;
-import com.intellij.designer.designSurface.tools.SelectionTool;
-import com.intellij.designer.designSurface.tools.ToolProvider;
-import com.intellij.designer.model.FindComponentVisitor;
-import com.intellij.designer.model.Property;
-import com.intellij.designer.model.RadComponent;
-import com.intellij.designer.model.RadPropertyContext;
-import com.intellij.designer.model.WrapInProvider;
+import com.intellij.designer.designSurface.tools.*;
+import com.intellij.designer.model.*;
 import com.intellij.designer.palette.PaletteGroup;
 import com.intellij.designer.palette.PaletteItem;
 import com.intellij.designer.palette.PaletteToolWindowManager;
@@ -68,18 +32,8 @@ import com.intellij.designer.propertyTable.TablePanelActionPolicy;
 import com.intellij.diagnostic.AttachmentFactory;
 import com.intellij.diagnostic.LogMessageEx;
 import com.intellij.icons.AllIcons;
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.ActionPlaces;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.DataProvider;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.actionSystem.EmptyAction;
-import com.intellij.openapi.actionSystem.Presentation;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.command.CommandProcessor;
-import com.intellij.openapi.diagnostic.Attachment;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -106,13 +60,28 @@ import com.intellij.util.ThrowableRunnable;
 import com.intellij.util.containers.IntArrayList;
 import com.intellij.util.ui.AsyncProcessIcon;
 import com.intellij.util.ui.UIUtil;
+import consulo.logging.Logger;
+import consulo.logging.attachment.Attachment;
+import org.jetbrains.annotations.NonNls;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
+import java.awt.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.*;
 
 /**
  * @author Alexander Lobas
  */
 public abstract class DesignerEditorPanel extends JPanel implements DesignerEditorPanelFacade, DataProvider, ModuleProvider, RadPropertyContext
 {
-	private static final Logger LOG = Logger.getInstance("#com.intellij.designer.designSurface.DesignerEditorPanel");
+	private static final Logger LOG = Logger.getInstance(DesignerEditorPanel.class);
 
 	protected static final Integer LAYER_COMPONENT = JLayeredPane.DEFAULT_LAYER;
 	protected static final Integer LAYER_DECORATION = JLayeredPane.POPUP_LAYER;
