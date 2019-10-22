@@ -1,6 +1,6 @@
-<idea-plugin>
-	<name>UI Designer (Core)</name>
+<consulo-plugin>
 	<id>com.intellij.ui-designer-new</id>
+	<name>UI Designer (Core)</name>
 	<description>Provides shared functionality for visual editing plugins.</description>
 	<vendor>JetBrains</vendor>
 	<version>SNAPSHOT</version>
@@ -17,4 +17,4 @@
 	<extensionPoints>
 		<extensionPoint name="customizations" interface="com.intellij.designer.DesignerCustomizations"/>
 	</extensionPoints>
-</idea-plugin>
+</consulo-plugin>

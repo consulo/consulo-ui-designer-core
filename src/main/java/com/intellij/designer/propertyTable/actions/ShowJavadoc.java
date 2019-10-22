@@ -90,7 +90,7 @@ public class ShowJavadoc extends AnAction implements IPropertyTableAction {
     ActionCallback callback;
     if (javadocElement == null) {
       callback = new ActionCallback();
-      component.setText(property.getJavadocText(), null, true);
+      component.setText(property.getJavadocText(), null, null);
     }
     else {
       callback = documentationManager.queueFetchDocInfo(javadocElement, component);

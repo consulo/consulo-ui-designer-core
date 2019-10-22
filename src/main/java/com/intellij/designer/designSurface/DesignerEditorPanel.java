@@ -1315,7 +1315,7 @@ public abstract class DesignerEditorPanel extends JPanel implements DesignerEdit
 
 		@Nonnull
 		@Override
-		public DefaultActionGroup createPopupActionGroup(DataContext context)
+		public DefaultActionGroup createPopupActionGroup(JComponent button)
 		{
 			DefaultActionGroup actionGroup = new DefaultActionGroup();
 			for(final FixableMessageInfo message : myItems)

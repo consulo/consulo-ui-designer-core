@@ -15,27 +15,21 @@
  */
 package com.intellij.designer.actions;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.util.Collections;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.swing.Icon;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.actionSystem.ex.ComboBoxAction;
 import com.intellij.util.PlatformIcons;
 import consulo.actionSystem.ex.ComboBoxButton;
 import consulo.annotations.RequiredDispatchThread;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.*;
+import java.awt.*;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Alexander Lobas
@@ -106,7 +100,7 @@ public abstract class AbstractComboBoxAction<T> extends ComboBoxAction
 
 	@Nonnull
 	@Override
-	public DefaultActionGroup createPopupActionGroup(DataContext context)
+	public DefaultActionGroup createPopupActionGroup(JComponent button)
 	{
 		DefaultActionGroup actionGroup = new DefaultActionGroup();
 
