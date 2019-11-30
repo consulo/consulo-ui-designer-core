@@ -15,15 +15,6 @@
  */
 package com.intellij.designer;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-
-import javax.annotation.Nonnull;
-import javax.swing.JComponent;
-import javax.swing.JScrollPane;
-
 import com.intellij.designer.componentTree.ComponentTree;
 import com.intellij.designer.componentTree.ComponentTreeBuilder;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
@@ -39,7 +30,13 @@ import com.intellij.ui.IdeBorderFactory;
 import com.intellij.ui.ScrollPaneFactory;
 import com.intellij.ui.SideBorder;
 import com.intellij.util.ui.tree.TreeUtil;
-import consulo.annotations.RequiredDispatchThread;
+import consulo.ui.annotation.RequiredUIAccess;
+
+import javax.annotation.Nonnull;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  * @author Alexander Lobas
@@ -156,7 +153,7 @@ public final class DesignerToolWindow implements DesignerToolWindowContent
 	{
 		AnAction expandAll = new AnAction("Expand All", null, AllIcons.Actions.Expandall)
 		{
-			@RequiredDispatchThread
+			@RequiredUIAccess
 			@Override
 			public void actionPerformed(@Nonnull AnActionEvent e)
 			{
@@ -169,7 +166,7 @@ public final class DesignerToolWindow implements DesignerToolWindowContent
 
 		AnAction collapseAll = new AnAction("Collapse All", null, AllIcons.Actions.Collapseall)
 		{
-			@RequiredDispatchThread
+			@RequiredUIAccess
 			@Override
 			public void actionPerformed(@Nonnull AnActionEvent e)
 			{

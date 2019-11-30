@@ -22,7 +22,7 @@ import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.actionSystem.ex.ComboBoxAction;
 import com.intellij.util.PlatformIcons;
 import consulo.actionSystem.ex.ComboBoxButton;
-import consulo.annotations.RequiredDispatchThread;
+import consulo.ui.annotation.RequiredUIAccess;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -113,7 +113,7 @@ public abstract class AbstractComboBoxAction<T> extends ComboBoxAction
 
 			AnAction action = new AnAction()
 			{
-				@RequiredDispatchThread
+				@RequiredUIAccess
 				@Override
 				public void actionPerformed(@Nonnull AnActionEvent e)
 				{
