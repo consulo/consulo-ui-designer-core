@@ -15,36 +15,31 @@
  */
 package com.intellij.designer.propertyTable;
 
-import java.awt.Dimension;
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.JViewport;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-
-import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import com.intellij.codeInsight.daemon.impl.SeverityRegistrar;
 import com.intellij.designer.DesignerBundle;
 import com.intellij.designer.designSurface.ComponentSelectionListener;
 import com.intellij.designer.designSurface.DesignerEditorPanel;
 import com.intellij.designer.designSurface.EditableArea;
-import com.intellij.designer.model.ErrorInfo;
-import com.intellij.designer.model.PropertiesContainer;
-import com.intellij.designer.model.Property;
-import com.intellij.designer.model.PropertyContext;
-import com.intellij.designer.model.RadComponent;
+import com.intellij.designer.model.*;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.actionSystem.DataProvider;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Key;
 import com.intellij.util.ThrowableRunnable;
+import consulo.util.dataholder.Key;
+import org.jetbrains.annotations.NonNls;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import java.awt.*;
+import java.util.Collections;
+import java.util.List;
 
 public class RadPropertyTable extends PropertyTable implements DataProvider, ComponentSelectionListener {
   private final Project myProject;

@@ -15,18 +15,17 @@
  */
 package com.intellij.designer.designSurface;
 
-import java.awt.Cursor;
-import java.util.Collection;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.swing.JComponent;
-
-import javax.annotation.Nullable;
 import com.intellij.designer.designSurface.tools.InputTool;
 import com.intellij.designer.model.RadComponent;
 import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.util.Key;
+import consulo.util.dataholder.Key;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.*;
+import java.awt.*;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Alexander Lobas
