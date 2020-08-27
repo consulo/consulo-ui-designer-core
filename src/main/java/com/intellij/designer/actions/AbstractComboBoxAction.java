@@ -15,6 +15,7 @@
  */
 package com.intellij.designer.actions;
 
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
@@ -36,8 +37,6 @@ import java.util.List;
  */
 public abstract class AbstractComboBoxAction<T> extends ComboBoxAction
 {
-	protected static final Icon CHECKED = PlatformIcons.CHECK_ICON;
-
 	protected List<T> myItems = Collections.emptyList();
 	private T mySelection;
 	private Presentation myPresentation;
@@ -127,7 +126,7 @@ public abstract class AbstractComboBoxAction<T> extends ComboBoxAction
 			actionGroup.add(action);
 
 			Presentation presentation = action.getTemplatePresentation();
-			presentation.setIcon(mySelection == item ? CHECKED : null);
+			presentation.setIcon(mySelection == item ? AllIcons.Actions.Checked : null);
 			update(item, presentation, true);
 		}
 

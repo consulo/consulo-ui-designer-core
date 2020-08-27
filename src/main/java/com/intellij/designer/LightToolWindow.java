@@ -15,64 +15,32 @@
  */
 package com.intellij.designer;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.annotation.Nullable;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
-import javax.annotation.Nonnull;
-
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.util.PropertiesComponent;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.ActionPlaces;
-import com.intellij.openapi.actionSystem.ActionPopupMenu;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.actionSystem.Presentation;
-import com.intellij.openapi.actionSystem.ToggleAction;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.impl.ActionManagerImpl;
 import com.intellij.openapi.actionSystem.impl.MenuItemPresentationFactory;
 import com.intellij.openapi.keymap.KeymapUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ThreeComponentsSplitter;
 import com.intellij.openapi.util.SystemInfo;
-import com.intellij.openapi.wm.IdeFocusManager;
-import com.intellij.openapi.wm.ToolWindow;
-import com.intellij.openapi.wm.ToolWindowAnchor;
-import com.intellij.openapi.wm.ToolWindowType;
-import com.intellij.openapi.wm.WindowManager;
+import com.intellij.openapi.wm.*;
 import com.intellij.openapi.wm.ex.ToolWindowEx;
 import com.intellij.openapi.wm.impl.AnchoredButton;
 import com.intellij.openapi.wm.impl.DesktopStripeButtonUI;
-import com.intellij.ui.IdeBorderFactory;
-import com.intellij.ui.InplaceButton;
-import com.intellij.ui.PopupHandler;
-import com.intellij.ui.SideBorder;
-import com.intellij.ui.UIBundle;
+import com.intellij.ui.*;
 import com.intellij.ui.components.panels.Wrapper;
 import com.intellij.ui.tabs.TabsUtil;
-import com.intellij.util.ui.EmptyIcon;
 import com.intellij.util.ui.UIUtil;
 import consulo.ui.ex.ToolWindowInternalDecorator;
+import consulo.ui.image.Image;
 import consulo.wm.impl.ToolWindowContentUI;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  * @author Alexander Lobas
@@ -633,7 +601,7 @@ public class LightToolWindow extends JPanel
 			myAction = action;
 
 			Presentation presentation = action.getTemplatePresentation();
-			InplaceButton button = new InplaceButton(KeymapUtil.createTooltipText(presentation.getText(), action), EmptyIcon.ICON_16, this)
+			InplaceButton button = new InplaceButton(KeymapUtil.createTooltipText(presentation.getText(), action), Image.empty(Image.DEFAULT_ICON_SIZE), this)
 			{
 				@Override
 				public boolean isActive()
@@ -644,8 +612,8 @@ public class LightToolWindow extends JPanel
 			button.setHoveringEnabled(!SystemInfo.isMac);
 			setContent(button);
 
-			Icon icon = presentation.getIcon();
-			Icon hoveredIcon = presentation.getHoveredIcon();
+			Image icon = presentation.getIcon();
+            Image hoveredIcon = presentation.getHoveredIcon();
 			button.setIcons(icon, icon, hoveredIcon == null ? icon : hoveredIcon);
 		}
 

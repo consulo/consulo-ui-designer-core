@@ -15,9 +15,9 @@
  */
 package com.intellij.designer.propertyTable;
 
-import javax.annotation.Nonnull;
+import consulo.ui.image.Image;
 
-import javax.swing.*;
+import javax.annotation.Nonnull;
 
 /**
  * @author Alexander Lobas
@@ -25,9 +25,9 @@ import javax.swing.*;
 public final class PropertyTableTab {
   private final String myKey;
   private final String myDescription;
-  private final Icon myIcon;
+  private final Image myIcon;
 
-  public PropertyTableTab(@Nonnull String key, @Nonnull String description, @Nonnull Icon icon) {
+  public PropertyTableTab(@Nonnull String key, @Nonnull String description, @Nonnull Image icon) {
     myKey = key;
     myDescription = description;
     myIcon = icon;
@@ -44,7 +44,7 @@ public final class PropertyTableTab {
   }
 
   @Nonnull
-  public Icon getIcon() {
+  public Image getIcon() {
     return myIcon;
   }
 }
