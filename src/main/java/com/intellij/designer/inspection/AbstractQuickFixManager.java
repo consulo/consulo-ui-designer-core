@@ -37,6 +37,9 @@ import com.intellij.util.Alarm;
 import com.intellij.util.IJSwingUtilities;
 import com.intellij.util.ThrowableRunnable;
 import com.intellij.util.ui.EmptyIcon;
+import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -263,7 +266,7 @@ public abstract class AbstractQuickFixManager {
     }
 
     @Override
-    public Icon getIconFor(ErrorInfo value) {
+    public Image getIconFor(ErrorInfo value) {
       return AllIcons.Actions.RealIntentionBulb;
     }
 
@@ -299,8 +302,8 @@ public abstract class AbstractQuickFixManager {
     }
 
     @Override
-    public Icon getIconFor(QuickFix value) {
-      return value.getIcon();
+    public Image getIconFor(QuickFix value) {
+      return TargetAWT.from(value.getIcon());
     }
 
     @Nonnull
