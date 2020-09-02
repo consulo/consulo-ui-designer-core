@@ -3,10 +3,10 @@ package com.intellij.designer.model;
 import com.intellij.designer.palette.PaletteItem;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.util.text.StringUtil;
+import consulo.ui.image.Image;
 import org.jdom.Element;
-import javax.annotation.Nullable;
 
-import javax.swing.*;
+import javax.annotation.Nullable;
 
 /**
  * Implementation of a {@link PaletteItem} which delegates to another {@linkplain PaletteItem}
@@ -19,7 +19,7 @@ final class VariationPaletteItem implements PaletteItem {
   private final String myIconPath;
   private final String myTooltip;
   private final String myCreation;
-  private Icon myIcon;
+  private Image myIcon;
 
   VariationPaletteItem(PaletteItem defaultItem, MetaModel model, Element element) {
     myDefaultItem = defaultItem;
@@ -58,7 +58,7 @@ final class VariationPaletteItem implements PaletteItem {
   }
 
   @Override
-  public Icon getIcon() {
+  public Image getIcon() {
     if (myIcon == null) {
       assert myIconPath != null;
       myIcon = IconLoader.findIcon(myIconPath, myModel.getModel());

@@ -19,6 +19,8 @@ import com.intellij.designer.palette.DefaultPaletteItem;
 import com.intellij.designer.propertyTable.IPropertyDecorator;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.util.ArrayUtil;
+import consulo.ui.image.Image;
+
 import javax.annotation.Nonnull;
 
 import javax.swing.*;
@@ -36,7 +38,7 @@ public class MetaModel {
   private DefaultPaletteItem myPaletteItem;
   private String myTitle;
   private String myIconPath;
-  private Icon myIcon;
+  private Image myIcon;
   private String myCreation;
   private boolean myDelete = true;
   private List<String> myInplaceProperties = Collections.emptyList();
@@ -101,7 +103,7 @@ public class MetaModel {
     return myTitle;
   }
 
-  public Icon getIcon() {
+  public Image getIcon() {
     if (myIcon == null) {
       if (myIconPath == null) {
         return myPaletteItem == null ? null : myPaletteItem.getIcon();

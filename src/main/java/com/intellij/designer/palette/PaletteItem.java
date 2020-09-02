@@ -16,9 +16,9 @@
 package com.intellij.designer.palette;
 
 import com.intellij.designer.model.MetaModel;
-import javax.annotation.Nullable;
+import consulo.ui.image.Image;
 
-import javax.swing.*;
+import javax.annotation.Nullable;
 
 /**
  * @author Alexander Lobas
@@ -26,7 +26,7 @@ import javax.swing.*;
 public interface PaletteItem {
   String getTitle();
 
-  Icon getIcon();
+  Image getIcon();
 
   String getTooltip();
 

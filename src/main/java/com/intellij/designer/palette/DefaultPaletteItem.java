@@ -17,10 +17,10 @@ package com.intellij.designer.palette;
 
 import com.intellij.designer.model.MetaModel;
 import com.intellij.openapi.util.IconLoader;
+import consulo.ui.image.Image;
 import org.jdom.Element;
-import javax.annotation.Nullable;
 
-import javax.swing.*;
+import javax.annotation.Nullable;
 
 /**
  * @author Alexander Lobas
@@ -28,7 +28,7 @@ import javax.swing.*;
 public class DefaultPaletteItem implements PaletteItem {
   private final String myTitle;
   protected final String myIconPath;
-  protected Icon myIcon;
+  protected Image myIcon;
   private final String myTooltip;
   private final String myVersion;
   private boolean myEnabled = true;
@@ -66,7 +66,7 @@ public class DefaultPaletteItem implements PaletteItem {
   }
 
   @Override
-  public Icon getIcon() {
+  public Image getIcon() {
     if (myIcon == null) {
       myIcon = IconLoader.findIcon(myIconPath, myMetaModel.getModel());
     }

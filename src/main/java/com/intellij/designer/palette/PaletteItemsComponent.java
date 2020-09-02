@@ -21,15 +21,15 @@ import com.intellij.ide.dnd.DnDAction;
 import com.intellij.ide.dnd.DnDDragStartBean;
 import com.intellij.ide.dnd.DnDManager;
 import com.intellij.ide.dnd.DnDSource;
-import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.ui.UIUtil;
-import javax.annotation.Nullable;
+import consulo.ui.image.ImageEffects;
 
+import javax.annotation.Nullable;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicListUI;
 import java.awt.*;
@@ -79,7 +79,7 @@ public class PaletteItemsComponent extends JBList {
           setIcon(item.getIcon());
         }
         else {
-          setIcon(IconLoader.getDisabledIcon(item.getIcon()));
+          setIcon(ImageEffects.grayed(item.getIcon()));
         }
 
         String title = item.getTitle();

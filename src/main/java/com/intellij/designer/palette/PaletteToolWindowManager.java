@@ -15,9 +15,6 @@
  */
 package com.intellij.designer.palette;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.intellij.designer.AbstractToolWindowManager;
 import com.intellij.designer.DesignerCustomizations;
 import com.intellij.designer.DesignerEditorPanelFacade;
@@ -30,6 +27,9 @@ import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentManager;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author Alexander Lobas
@@ -73,7 +73,7 @@ public class PaletteToolWindowManager extends AbstractToolWindowManager
 	@Override
 	protected void initToolWindow()
 	{
-		myToolWindow = ToolWindowManager.getInstance(myProject).registerToolWindow("Palette\t", false, getAnchor(), myProject, true);
+		myToolWindow = ToolWindowManager.getInstance(myProject).registerToolWindow("Palette", false, getAnchor(), myProject, true);
 		myToolWindow.setIcon(AllIcons.Toolwindows.ToolWindowPalette);
 		initGearActions();
 
